@@ -1,24 +1,12 @@
 package org.onlydevs.domain;
 
+import lombok.Builder;
+
+@Builder
 public class Appointment {
-    private String firstNameVisitor;
-    private String lastNameVisitor;
-
-    public void setFirstNameVisitor(String firstNameVisitor) {
-        this.firstNameVisitor = firstNameVisitor;
-    }
-
-    public void setLastNameVisitor(String lastNameVisitor) {
-        this.lastNameVisitor = lastNameVisitor;
-    }
-
-    public String getFirstNameVisitor() {
-        return firstNameVisitor;
-    }
-
-    public String getLastNameVisitor() {
-        return lastNameVisitor;
-    }
-
-
+    private long id;
+    private Visitor visitor;
+    private Boolean comesByCar;
+    private String licensePlate;
+    private String parkingSpot;
 }
