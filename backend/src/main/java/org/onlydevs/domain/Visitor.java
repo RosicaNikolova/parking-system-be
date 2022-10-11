@@ -1,13 +1,10 @@
 package org.onlydevs.domain;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-@Getter
-@RequiredArgsConstructor
 @Builder
+@Getter
+@AllArgsConstructor
 public class Visitor {
     private String firstName;
     private String lastName;

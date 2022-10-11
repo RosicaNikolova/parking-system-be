@@ -1,5 +1,7 @@
 package org.onlydevs.persistence;
 
-public interface AppointmentRepository {
+import org.onlydevs.domain.Appointment;
 
+public interface AppointmentRepository {
+    public Appointment save(Appointment appointment);
 }

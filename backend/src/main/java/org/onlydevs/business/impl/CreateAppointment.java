@@ -12,6 +12,6 @@ public class CreateAppointment implements CreateAppointmentUseCase {
     private AppointmentRepository appointmentRepository;
     @Override
     public Appointment CreateAppointment(Appointment appointment) {
-        return null;
+        return appointmentRepository.save(appointment);
     }
 }
