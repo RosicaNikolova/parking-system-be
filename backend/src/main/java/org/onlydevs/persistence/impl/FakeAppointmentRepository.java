@@ -25,4 +25,14 @@ public class FakeAppointmentRepository {
                 ).comesByCar(false).licensePlate("99-XXX-XXX").parkingSpot("A2").build());
         idIncrementor = appointments.stream().count()+1;
     }
+
+    public Appointment save(Appointment appointment)
+    {
+        if (appointment.getId() == null || appointment.getId() == 0l)
+        {
+            return null;
+        }
+        return null;
+    }
+
 }

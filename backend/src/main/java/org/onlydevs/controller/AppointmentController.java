@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AppointmentController {
     @PostMapping
-    public ResponseEntity<AppointmentDTO> createAppointment()
+    public ResponseEntity<AppointmentDTO> createAppointment(Appointment appointment)
     {
         return null;
     }
