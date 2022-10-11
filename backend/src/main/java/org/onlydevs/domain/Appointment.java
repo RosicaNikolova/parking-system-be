@@ -8,6 +8,7 @@ import lombok.*;
 public class Appointment {
     private Long id;
     private Visitor visitor;
+    private Employee employee;
     private Boolean comesByCar;
     private String licensePlate;
     private String parkingSpot;
