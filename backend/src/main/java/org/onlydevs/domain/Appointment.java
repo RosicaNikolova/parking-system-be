@@ -11,7 +11,6 @@ public class Appointment {
     private Employee employee;
     private Boolean comesByCar;
     private String licensePlate;
-    private String parkingSpot;
 
     public Visitor getVisitor() {
         return visitor;

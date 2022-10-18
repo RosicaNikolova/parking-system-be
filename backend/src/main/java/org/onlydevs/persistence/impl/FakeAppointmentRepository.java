@@ -23,13 +23,13 @@ public class FakeAppointmentRepository implements AppointmentRepository {
                 .employee(
                         Employee.builder().firstName("EmployeeFirstname1").lastName("EmployeeLastName1").email("EmployeeEmail1@hotmail.com").build()
                 )
-                        .comesByCar(false).licensePlate("XX-999-999").parkingSpot("A1").build());
+                        .comesByCar(false).licensePlate("XX-999-999").build());
         appointments.add(Appointment.builder().id(2l)
                 .visitor(
                         Visitor.builder().firstName("Visitor2FirstName").lastName("Visitor2LastName").email("Visitor2@outlook.com").phoneNumber("0687654321").build())
                 .employee(
                         Employee.builder().firstName("EmployeeFirstname2").lastName("EmployeeLastName2").email("EmployeeEmail2@hotmail.com").build()
-        ).comesByCar(false).licensePlate("99-XXX-XXX").parkingSpot("A2").build());
+        ).comesByCar(false).licensePlate("99-XXX-XXX").build());
         idIncrementor = appointments.stream().count()+1;
     }
 
@@ -44,7 +44,6 @@ public class FakeAppointmentRepository implements AppointmentRepository {
                     .employee(appointment.getEmployee())
                     .comesByCar(appointment.getComesByCar())
                     .licensePlate(appointment.getLicensePlate())
-                    .parkingSpot(appointment.getParkingSpot())
                     .build();
             appointments.add(toAdd);
         }
