@@ -1,11 +1,11 @@
 package org.onlydevs.persistence.impl;
 
 import org.onlydevs.domain.Appointment;
-import org.onlydevs.domain.Employee;
 import org.onlydevs.domain.Visitor;
 import org.onlydevs.persistence.AppointmentRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +17,14 @@ public class FakeAppointmentRepository implements AppointmentRepository {
     public FakeAppointmentRepository()
     {
         appointments = new ArrayList<>();
-        appointments.add(Appointment.builder().id(1l)
+        appointments.add(Appointment.builder().id(1l).firstNameEmployee("EmployeeFirstName1").lastNameEmployee("EmployeeLastName1")
                 .visitor(
                         Visitor.builder().firstName("Visitor1FirstName").lastName("Visitor1LastName").email("Visitor1@outlook.com").phoneNumber("0612345678").build())
-                .employee(
-                        Employee.builder().firstName("EmployeeFirstname1").lastName("EmployeeLastName1").email("EmployeeEmail1@hotmail.com").build()
-                )
-                        .comesByCar(false).licensePlate("XX-999-999").build());
-        appointments.add(Appointment.builder().id(2l)
+                        .comesByCar(false).licensePlate("XX-999-999").dateTime(LocalDateTime.parse("2022-02-17T18:30:00")).build());
+        appointments.add(Appointment.builder().id(2l).firstNameEmployee("EmployeeFirstName2").lastNameEmployee("EmployeeLastName2")
                 .visitor(
                         Visitor.builder().firstName("Visitor2FirstName").lastName("Visitor2LastName").email("Visitor2@outlook.com").phoneNumber("0687654321").build())
-                .employee(
-                        Employee.builder().firstName("EmployeeFirstname2").lastName("EmployeeLastName2").email("EmployeeEmail2@hotmail.com").build()
-        ).comesByCar(false).licensePlate("99-XXX-XXX").build());
+                        .comesByCar(false).licensePlate("99-XXX-XXX").dateTime(LocalDateTime.parse("2022-02-17T18:30:00")).build());
         idIncrementor = appointments.stream().count()+1;
     }
 
@@ -41,9 +36,11 @@ public class FakeAppointmentRepository implements AppointmentRepository {
             toAdd = Appointment.builder()
                     .id(idIncrementor)
                     .visitor(appointment.getVisitor())
-                    .employee(appointment.getEmployee())
+                    .firstNameEmployee(appointment.getFirstNameEmployee())
+                    .firstNameEmployee(appointment.getLastNameEmployee())
                     .comesByCar(appointment.getComesByCar())
                     .licensePlate(appointment.getLicensePlate())
+                    .dateTime(appointment.getDateTime())
                     .build();
             appointments.add(toAdd);
         }

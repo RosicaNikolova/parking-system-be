@@ -12,7 +12,6 @@ public class CreateAppointment implements CreateAppointmentUseCase {
     private AppointmentRepository appointmentRepository;
     @Override
     public Appointment CreateAppointment(Appointment appointment) {
-        //To do automatically assign parking spot
         return appointmentRepository.save(appointment);
     }
 }
