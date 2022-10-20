@@ -3,9 +3,8 @@ package org.onlydevs.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-
-@Getter
 @Builder
+@Getter
 @AllArgsConstructor
 public class Employee {
     private String firstName;
