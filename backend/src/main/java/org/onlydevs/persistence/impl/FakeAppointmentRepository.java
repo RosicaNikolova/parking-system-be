@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -53,4 +54,20 @@ public class FakeAppointmentRepository implements AppointmentRepository {
         return toAdd;
     }
 
+    public Appointment update(Long id, LocalDateTime newDateTime) {
+        Appointment existingAppointment = appointments.get(Math.toIntExact(id));
+        Appointment updatedAppointment = null;
+
+        updatedAppointment = Appointment.builder()
+                .id(existingAppointment.getId())
+                .visitor(existingAppointment.getVisitor())
+                .employee(existingAppointment.getEmployee())
+                .comesByCar(existingAppointment.getComesByCar())
+                .licensePlate(existingAppointment.getLicensePlate())
+                .dateTime(newDateTime)
+                .build();
+        appointments.set(appointments.indexOf(existingAppointment), updatedAppointment);
+
+        return updatedAppointment;
+    }
 }
