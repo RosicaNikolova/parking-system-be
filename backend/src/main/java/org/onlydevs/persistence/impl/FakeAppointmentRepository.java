@@ -70,4 +70,10 @@ public class FakeAppointmentRepository implements AppointmentRepository {
 
         return updatedAppointment;
     }
+
+    public void delete(Long id) {
+        Appointment appointmentToRemove = appointments.get(Math.toIntExact(id));
+
+        appointments.remove(appointmentToRemove);
+    }
 }

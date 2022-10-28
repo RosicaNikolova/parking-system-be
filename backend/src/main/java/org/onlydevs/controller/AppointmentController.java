@@ -2,6 +2,7 @@ package org.onlydevs.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.onlydevs.business.CreateAppointmentUseCase;
+import org.onlydevs.business.DeleteAppointmentUseCase;
 import org.onlydevs.business.UpdateAppointmentUseCase;
 import org.onlydevs.controller.DTO.AppointmentDTO;
 import org.onlydevs.domain.Appointment;
@@ -19,7 +20,10 @@ import static java.lang.Long.parseLong;
 @CrossOrigin(origins = "http://localhost:3000")
 public class AppointmentController {
     private final CreateAppointmentUseCase createAppointmentUseCase;
+
     private final UpdateAppointmentUseCase updateAppointmentUseCase;
+
+    private final DeleteAppointmentUseCase deleteAppointmentUseCase;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody Appointment meeting)
@@ -50,5 +54,11 @@ public class AppointmentController {
         appointmentDTO.comesByCar = updatedAppointment.getComesByCar();
 
         return ResponseEntity.ok().body(appointmentDTO);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteAppointment(@PathVariable final Long id) {
+        deleteAppointmentUseCase.deleteAppointment(id);
+        return ResponseEntity.noContent().build();
     }
 }
