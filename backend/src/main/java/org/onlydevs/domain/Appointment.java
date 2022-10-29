@@ -1,24 +1,21 @@
 package org.onlydevs.domain;
 
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Builder
+@Getter
+@AllArgsConstructor
 public class Appointment {
-    private String firstNameVisitor;
-    private String lastNameVisitor;
+    private Long id;
+    private Visitor visitor;
+    private Employee employee;
+    private Boolean comesByCar;
+    private String licensePlate;
+    private LocalDateTime dateTime;
 
-    public void setFirstNameVisitor(String firstNameVisitor) {
-        this.firstNameVisitor = firstNameVisitor;
+    public Visitor getVisitor() {
+        return visitor;
     }
-
-    public void setLastNameVisitor(String lastNameVisitor) {
-        this.lastNameVisitor = lastNameVisitor;
-    }
-
-    public String getFirstNameVisitor() {
-        return firstNameVisitor;
-    }
-
-    public String getLastNameVisitor() {
-        return lastNameVisitor;
-    }
-
-
 }
