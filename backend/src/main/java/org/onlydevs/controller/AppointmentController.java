@@ -37,9 +37,9 @@ public class AppointmentController {
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AppointmentDTO> updateAppointment(@RequestBody String id) {
+    public ResponseEntity<AppointmentDTO> updateAppointment(@RequestBody Appointment appointment) {
         AppointmentDTO appointmentDTO = new AppointmentDTO();
-        Appointment updatedAppointment = updateAppointmentUseCase.updateAppointment(1l, LocalDateTime.parse("2007-12-03T10:15:30"));
+        Appointment updatedAppointment = updateAppointmentUseCase.updateAppointment(appointment.getId(), appointment.getDateTime());
 
         appointmentDTO.firstNameVisitor = updatedAppointment.getVisitor().getFirstName();
         appointmentDTO.lastNameVisitor = updatedAppointment.getVisitor().getLastName();
