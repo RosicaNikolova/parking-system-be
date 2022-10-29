@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 public class Appointment {
+
     private Long id;
     private Visitor visitor;
     private Employee employee;

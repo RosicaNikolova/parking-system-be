@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class FakeAppointmentRepository implements AppointmentRepository {
@@ -69,5 +70,18 @@ public class FakeAppointmentRepository implements AppointmentRepository {
         appointments.set(appointments.indexOf(existingAppointment), updatedAppointment);
 
         return updatedAppointment;
+    }
+
+    @Override
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    @Override
+    public Optional<Appointment> getAppointment(Long id) {
+
+        return this.appointments.stream()
+                .filter(appointment -> appointment.getId().equals(id))
+                .findFirst();
     }
 }
