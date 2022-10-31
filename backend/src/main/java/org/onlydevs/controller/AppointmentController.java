@@ -95,7 +95,7 @@ public class AppointmentController {
             return ResponseEntity.ok().body(appointmentDTO.get());
         }
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAppointment(@PathVariable final Long id) {
         deleteAppointmentUseCase.deleteAppointment(id);
         return ResponseEntity.noContent().build();
