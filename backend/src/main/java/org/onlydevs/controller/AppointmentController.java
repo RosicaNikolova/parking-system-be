@@ -36,14 +36,14 @@ public class AppointmentController {
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody Appointment meeting)
     {
         AppointmentDTO appointmentDTO = new AppointmentDTO();
-       // Appointment savedAppointment = createAppointmentUseCase.CreateAppointment(meeting);
-//        appointmentDTO.firstNameVisitor = savedAppointment.getVisitor().getFirstName();
-//        appointmentDTO.lastNameVisitor = savedAppointment.getVisitor().getLastName();
-//        appointmentDTO.emailVisitor = savedAppointment.getVisitor().getEmail();
-//        appointmentDTO.firstNameEmployee = savedAppointment.getEmployee().getFirstName();
-//        appointmentDTO.lastNameEmployee = savedAppointment.getEmployee().getLastName();
-//        appointmentDTO.dateTime = savedAppointment.getDateTime();
-//        appointmentDTO.comesByCar = savedAppointment.getComesByCar();
+        Appointment savedAppointment = createAppointmentUseCase.CreateAppointment(meeting);
+        appointmentDTO.firstNameVisitor = savedAppointment.getVisitor().getFirstName();
+        appointmentDTO.lastNameVisitor = savedAppointment.getVisitor().getLastName();
+        appointmentDTO.emailVisitor = savedAppointment.getVisitor().getEmail();
+        appointmentDTO.firstNameEmployee = savedAppointment.getEmployee().getFirstName();
+        appointmentDTO.lastNameEmployee = savedAppointment.getEmployee().getLastName();
+        appointmentDTO.dateTime = savedAppointment.getDateTime();
+        appointmentDTO.comesByCar = savedAppointment.getComesByCar();
         return ResponseEntity.ok().body(appointmentDTO);
     }
 

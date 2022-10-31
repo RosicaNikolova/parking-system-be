@@ -3,8 +3,10 @@ package org.onlydevs.controller.converters;
 import lombok.NoArgsConstructor;
 import org.onlydevs.controller.DTO.AppointmentDTO;
 import org.onlydevs.domain.Appointment;
+import org.springframework.stereotype.Service;
 
 @NoArgsConstructor
+@Service
 public final class AppointmentConverterDTO {
 
     public AppointmentDTO convertToDTO (Appointment appointment){
