@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.onlydevs.business.CreateAppointmentUseCase;
 import org.onlydevs.business.GetAppointmentUseCase;
 import org.onlydevs.business.GetAppointmentsUseCase;
+import org.onlydevs.business.DeleteAppointmentUseCase;
 import org.onlydevs.business.UpdateAppointmentUseCase;
 import org.onlydevs.controller.DTO.ApointmentsDTO;
 import org.onlydevs.controller.DTO.AppointmentDTO;
@@ -26,11 +27,14 @@ import static java.lang.Long.parseLong;
 public class AppointmentController {
 
     private final CreateAppointmentUseCase createAppointmentUseCase;
+
     private final UpdateAppointmentUseCase updateAppointmentUseCase;
     private final AppointmentConverterDTO appointmentConverterDTO;
     private final GetAppointmentsUseCase getAppointmentsUseCase;
 
     private final GetAppointmentUseCase getAppointmentUseCase;
+
+    private final DeleteAppointmentUseCase deleteAppointmentUseCase;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody Appointment meeting)
@@ -55,6 +59,7 @@ public class AppointmentController {
         appointmentDTO.firstNameVisitor = updatedAppointment.getVisitor().getFirstName();
         appointmentDTO.lastNameVisitor = updatedAppointment.getVisitor().getLastName();
         appointmentDTO.emailVisitor = updatedAppointment.getVisitor().getEmail();
+        appointmentDTO.phoneVisitor = updatedAppointment.getVisitor().getPhoneNumber();
         appointmentDTO.firstNameEmployee = updatedAppointment.getEmployee().getFirstName();
         appointmentDTO.lastNameEmployee = updatedAppointment.getEmployee().getLastName();
         appointmentDTO.dateTime = updatedAppointment.getDateTime();
@@ -63,7 +68,7 @@ public class AppointmentController {
         return ResponseEntity.ok().body(appointmentDTO);
     }
 
-    @GetMapping("appointments")
+    @GetMapping("/appointments")
     public ResponseEntity<ApointmentsDTO> getAppointment(){
 
         List<Appointment> appointments= getAppointmentsUseCase.getAppointments();
@@ -78,17 +83,21 @@ public class AppointmentController {
         }
 
     }
-    @GetMapping("{id}")
-    public ResponseEntity<AppointmentDTO> getAppointment(@PathVariable(value = "id") final long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<AppointmentDTO> getAppointment(@PathVariable(value = "id") final long id) {
 
         final Optional<Appointment> appointmentOptional = getAppointmentUseCase.getAppointmnet(id);
 
-        if(appointmentOptional.isEmpty()){
+        if (appointmentOptional.isEmpty()) {
             return ResponseEntity.notFound().build();
-        }
-        else{
+        } else {
             Optional<AppointmentDTO> appointmentDTO = Optional.of(appointmentConverterDTO.convertToDTO(appointmentOptional.get()));
             return ResponseEntity.ok().body(appointmentDTO.get());
         }
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAppointment(@PathVariable final Long id) {
+        deleteAppointmentUseCase.deleteAppointment(id);
+        return ResponseEntity.noContent().build();
     }
 }

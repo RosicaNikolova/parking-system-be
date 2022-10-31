@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppointmentDTO {
+    public Long id;
     public String firstNameVisitor;
     public String lastNameVisitor;
     public String emailVisitor;
