@@ -1,6 +1,7 @@
 package org.onlydevs.controller.DTO;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -8,8 +9,8 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
+@Builder
 public class ApointmentsDTO {
 
-    private List<AppointmentDTO> appointmentList;
+    public List<AppointmentDTO> appointmentList;
 }

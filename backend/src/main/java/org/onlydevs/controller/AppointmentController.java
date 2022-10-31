@@ -63,7 +63,7 @@ public class AppointmentController {
         return ResponseEntity.ok().body(appointmentDTO);
     }
 
-    @GetMapping("appointments")
+    @GetMapping("/appointments")
     public ResponseEntity<ApointmentsDTO> getAppointment(){
 
         List<Appointment> appointments= getAppointmentsUseCase.getAppointments();
@@ -78,7 +78,7 @@ public class AppointmentController {
         }
 
     }
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<AppointmentDTO> getAppointment(@PathVariable(value = "id") final long id){
 
         final Optional<Appointment> appointmentOptional = getAppointmentUseCase.getAppointmnet(id);
