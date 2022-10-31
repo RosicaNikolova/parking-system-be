@@ -14,6 +14,8 @@ public final class AppointmentConverterDTO {
         return AppointmentDTO.builder()
                 .firstNameVisitor(appointment.getVisitor().getFirstName())
                 .lastNameVisitor(appointment.getVisitor().getLastName())
+                .firstNameEmployee(appointment.getEmployee().getFirstName())
+                .lastNameEmployee(appointment.getEmployee().getLastName())
                 .dateTime(appointment.getDateTime())
                 .emailVisitor(appointment.getVisitor().getEmail())
                 .phoneVisitor(appointment.getVisitor().getPhoneNumber())
