@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AppointmentRepository {
-    public Appointment save(Appointment appointment);
+    Appointment save(Appointment appointment);
 
     public Appointment update(Long id, LocalDateTime newDateTime);
     public List<Appointment> getAppointments();
 
     Optional<Appointment> getAppointment(Long id);
+
+    void delete(Long id);
 }

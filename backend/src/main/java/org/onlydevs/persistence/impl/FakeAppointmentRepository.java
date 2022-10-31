@@ -85,4 +85,9 @@ public class FakeAppointmentRepository implements AppointmentRepository {
                 .filter(appointment -> appointment.getId().equals(id))
                 .findFirst();
     }
+    public void delete(Long id) {
+        Appointment appointmentToRemove = appointments.get(Math.toIntExact(id));
+
+        appointments.remove(appointmentToRemove);
+    }
 }
