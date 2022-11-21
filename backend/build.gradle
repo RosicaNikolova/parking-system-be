@@ -24,6 +24,9 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.24'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.10'
+    // https://mvnrepository.com/artifact/com.microsoft.azure/msal4j
+    implementation group: 'com.microsoft.azure', name: 'msal4j', version: '1.13.3'
+
 }
 
 test {

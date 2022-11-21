@@ -1,4 +1,6 @@
 package org.onlydevs;
+import com.microsoft.aad.msal4j.IAuthenticationResult;
+import org.onlydevs.outlook.OutlookCalendarService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
