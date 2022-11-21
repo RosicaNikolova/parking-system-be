@@ -1,24 +1,20 @@
 package org.onlydevs.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.onlydevs.business.CreateAppointmentUseCase;
-import org.onlydevs.business.GetAppointmentUseCase;
-import org.onlydevs.business.GetAppointmentsUseCase;
-import org.onlydevs.business.DeleteAppointmentUseCase;
-import org.onlydevs.business.UpdateAppointmentUseCase;
+import org.onlydevs.business.*;
 import org.onlydevs.controller.DTO.ApointmentsDTO;
 import org.onlydevs.controller.DTO.AppointmentDTO;
+import org.onlydevs.controller.DTO.TimeSlotsEmployeeDateDTO;
 import org.onlydevs.controller.converters.AppointmentConverterDTO;
 import org.onlydevs.domain.Appointment;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static java.lang.Long.parseLong;
 
 @RestController
 @RequestMapping("/appointment")
@@ -35,6 +31,7 @@ public class AppointmentController {
     private final GetAppointmentUseCase getAppointmentUseCase;
 
     private final DeleteAppointmentUseCase deleteAppointmentUseCase;
+    private final GetTimeSlotsForDateForEmployeeUseCase getTimeSlotsForDateForEmployeeUseCase;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody Appointment meeting)
@@ -100,4 +97,16 @@ public class AppointmentController {
         deleteAppointmentUseCase.deleteAppointment(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping(value= "{id}/{year}/{month}/{day}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@PathVariable Long id, @PathVariable int year, @PathVariable int month, @PathVariable int day) {
+
+        LocalDate date = LocalDate.of(year, month, day);
+        TimeSlotsEmployeeDateDTO timeSlots = TimeSlotsEmployeeDateDTO.builder()
+                .timeSlots(getTimeSlotsForDateForEmployeeUseCase.timeSlotsForDate(id, date))
+                .build();
+
+        return ResponseEntity.ok().body(timeSlots);
+    }
+
 }
