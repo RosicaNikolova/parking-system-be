@@ -15,7 +15,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/appointment")
 @RequiredArgsConstructor
@@ -33,6 +32,7 @@ public class AppointmentController {
     private final DeleteAppointmentUseCase deleteAppointmentUseCase;
     private final GetTimeSlotsForDateForEmployeeUseCase getTimeSlotsForDateForEmployeeUseCase;
 
+    @CrossOrigin
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody Appointment meeting)
     {
@@ -64,7 +64,7 @@ public class AppointmentController {
 
         return ResponseEntity.ok().body(appointmentDTO);
     }
-
+    @CrossOrigin
     @GetMapping("/appointments")
     public ResponseEntity<ApointmentsDTO> getAppointment(){
 
@@ -97,10 +97,10 @@ public class AppointmentController {
         deleteAppointmentUseCase.deleteAppointment(id);
         return ResponseEntity.noContent().build();
     }
-
-    @GetMapping(value= "{id}/{year}/{month}/{day}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@PathVariable Long id, @PathVariable int year, @PathVariable int month, @PathVariable int day) {
-
+    @CrossOrigin
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@PathVariable Long id, @PathVariable int year, @PathVariable int month, @PathVariable int day) {
+    public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@RequestParam Long id, @RequestParam int year, @RequestParam int month, @RequestParam int day) {
         LocalDate date = LocalDate.of(year, month, day);
         TimeSlotsEmployeeDateDTO timeSlots = TimeSlotsEmployeeDateDTO.builder()
                 .timeSlots(getTimeSlotsForDateForEmployeeUseCase.timeSlotsForDate(id, date))
