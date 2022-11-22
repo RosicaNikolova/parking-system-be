@@ -6,11 +6,13 @@ import org.onlydevs.domain.Visitor;
 import org.onlydevs.persistence.AppointmentRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class FakeAppointmentRepository implements AppointmentRepository {
@@ -23,16 +25,16 @@ public class FakeAppointmentRepository implements AppointmentRepository {
         appointments.add(Appointment.builder().id(1l)
                 .visitor(
                         Visitor.builder().firstName("Visitor1FirstName").lastName("Visitor1LastName").email("Visitor1@outlook.com").phoneNumber("0612345678").build())
-                        .comesByCar(false).licensePlate("XX-999-999").dateTime(LocalDateTime.parse("2022-02-17T18:30:00"))
+                        .comesByCar(false).licensePlate("XX-999-999").dateTime(LocalDateTime.parse("2022-11-21T10:30:00"))
                 .employee(
-                        Employee.builder().firstName("Employee1FirstName").lastName("Employee2LastName").email("Employee2@hotmail.com").build()
+                        Employee.builder().id(1L).firstName("Casper").lastName("Smithovski").email("Casper@hotmail.com").build()
                 ).build());
         appointments.add(Appointment.builder().id(2l)
                 .visitor(
                         Visitor.builder().firstName("Visitor2FirstName").lastName("Visitor2LastName").email("Visitor2@outlook.com").phoneNumber("0687654321").build())
-                        .comesByCar(false).licensePlate("99-XXX-XXX").dateTime(LocalDateTime.parse("2022-02-17T18:30:00"))
+                        .comesByCar(false).licensePlate("99-XXX-XXX").dateTime(LocalDateTime.parse("2022-11-21T16:00:00"))
                 .employee(
-                        Employee.builder().firstName("Employee1FirstName").lastName("Employee2LastName").email("Employee2@hotmail.com").build()
+                        Employee.builder().id(1L).firstName("Elviro").lastName("Pereirovich").email("Elviro@hotmail.com").build()
                 ).build());
         idIncrementor = appointments.stream().count()+1;
     }
@@ -90,5 +92,12 @@ public class FakeAppointmentRepository implements AppointmentRepository {
         Appointment appointmentToRemove = appointments.get(Math.toIntExact(id)-1);
 
         appointments.remove(appointmentToRemove);
+    }
+
+    @Override
+    public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDate date) {
+       return appointments.stream()
+               .filter(appointment -> appointment.getEmployee().getId().equals(employeeId) && appointment.getDateTime().toLocalDate().equals(date))
+               .collect(Collectors.toList());
     }
 }
