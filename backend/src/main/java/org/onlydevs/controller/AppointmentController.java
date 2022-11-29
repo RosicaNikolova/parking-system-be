@@ -4,9 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.onlydevs.business.*;
 import org.onlydevs.controller.DTO.ApointmentsDTO;
 import org.onlydevs.controller.DTO.AppointmentDTO;
+import org.onlydevs.controller.DTO.EmployeesByLastNameDTO;
 import org.onlydevs.controller.DTO.TimeSlotsEmployeeDateDTO;
 import org.onlydevs.controller.converters.AppointmentConverterDTO;
+import org.onlydevs.controller.converters.EmployeeConverterDTO;
 import org.onlydevs.domain.Appointment;
+import org.onlydevs.domain.Employee;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +34,10 @@ public class AppointmentController {
 
     private final DeleteAppointmentUseCase deleteAppointmentUseCase;
     private final GetTimeSlotsForDateForEmployeeUseCase getTimeSlotsForDateForEmployeeUseCase;
+
+    private final GetEmployeesByLastNameUseCase getEmployeesByLastNameUseCase;
+
+    private final EmployeeConverterDTO employeeConverterDTO;
 
     @CrossOrigin
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -108,5 +115,22 @@ public class AppointmentController {
 
         return ResponseEntity.ok().body(timeSlots);
     }
+
+    @GetMapping("/employees/{lastName}")
+    public ResponseEntity<EmployeesByLastNameDTO> getEmployeesByLastName(@PathVariable String lastName) {
+        List<Employee> emplyees = getEmployeesByLastNameUseCase.getEmployeesByLastName(lastName);
+
+        EmployeesByLastNameDTO employeesByLastNameDTO =
+                EmployeesByLastNameDTO.builder()
+                .employeeDTOList(emplyees
+                        .stream()
+                        .map(employee -> employeeConverterDTO.covertEmployeeToDTO(employee))
+                        .toList())
+                .build();
+
+        return ResponseEntity.ok().body(employeesByLastNameDTO);
+    }
+
+
 
 }
