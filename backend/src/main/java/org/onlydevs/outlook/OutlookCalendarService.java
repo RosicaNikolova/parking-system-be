@@ -2,12 +2,16 @@ package org.onlydevs.outlook;
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.google.gson.Gson;
 import com.microsoft.aad.msal4j.ClientCredentialFactory;
 import com.microsoft.aad.msal4j.ClientCredentialParameters;
 import com.microsoft.aad.msal4j.ConfidentialClientApplication;
 import com.microsoft.aad.msal4j.IAuthenticationResult;
+import com.nimbusds.jose.shaded.json.parser.JSONParser;
 import com.nimbusds.oauth2.sdk.http.HTTPResponse;
 import org.onlydevs.domain.Appointment;
+import org.onlydevs.domain.OutlookAppointment;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -103,7 +107,7 @@ public class OutlookCalendarService {
         }
     }
 
-    public void createAppointment(Appointment appointment) throws IOException {
+    public OutlookAppointment createAppointment(Appointment appointment) throws IOException {
         //URL url = new URL("https://graph.microsoft.com/beta/users/mikewangfontystest_outlook.com#EXT#@mikewangfontystestoutlook.onmicrosoft.com/calendar/events");
         IAuthenticationResult result = null;
         try {
@@ -111,7 +115,7 @@ public class OutlookCalendarService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
+        OutlookAppointment outlookAppointment = null;
         String accessToken = result.accessToken();
 
         URL url = new URL("https://graph.microsoft.com/v1.0/users/ca0dfa2b-a687-4448-95cf-c66cd08daf96/calendar/events");
@@ -157,9 +161,9 @@ public class OutlookCalendarService {
         }
 
         int httpResponseCode = conn.getResponseCode();
-        if(httpResponseCode == HTTPResponse.SC_OK) {
-
+        if(httpResponseCode == HTTPResponse.SC_CREATED) {
             StringBuilder response;
+            Gson g = new Gson();
             try(BufferedReader in = new BufferedReader(
                     new InputStreamReader(conn.getInputStream()))){
 
@@ -168,11 +172,13 @@ public class OutlookCalendarService {
                 while (( inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
+            outlookAppointment = g.fromJson(response.toString(), OutlookAppointment.class);
             }
         } else {
             System.out.println(String.format("Connection returned HTTP code: %s with message: %s",
                     httpResponseCode, conn.getResponseMessage()));
         }
+        return outlookAppointment;
     }
 
     public void deleteAppointment(String id) throws IOException {
