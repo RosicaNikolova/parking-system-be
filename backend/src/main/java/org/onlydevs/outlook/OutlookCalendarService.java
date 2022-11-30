@@ -175,6 +175,45 @@ public class OutlookCalendarService {
         }
     }
 
+    public void deleteAppointment(String id) throws IOException {
+        //URL url = new URL("https://graph.microsoft.com/beta/users/mikewangfontystest_outlook.com#EXT#@mikewangfontystestoutlook.onmicrosoft.com/calendar/events");
+        IAuthenticationResult result = null;
+        try {
+            result = getAccessTokenByClientCredentialGrant();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        String accessToken = result.accessToken();
+
+        URL url = new URL("https://graph.microsoft.com/v1.0/users/ca0dfa2b-a687-4448-95cf-c66cd08daf96/calendar/events/" + id);
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setDoOutput(true);
+        conn.setRequestMethod("DELETE");
+        conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+        conn.setRequestProperty("Content-Type","application/json");
+        conn.setRequestProperty("Accept","application/json");
+
+        int httpResponseCode = conn.getResponseCode();
+        if(httpResponseCode == HTTPResponse.SC_OK) {
+
+            StringBuilder response;
+            try(BufferedReader in = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream()))){
+
+                String inputLine;
+                response = new StringBuilder();
+                while (( inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+            }
+        } else {
+            System.out.println(String.format("Connection returned HTTP code: %s with message: %s",
+                    httpResponseCode, conn.getResponseMessage()));
+        }
+    }
+
     /**
      * Helper function unique to this sample setting. In a real application these wouldn't be so hardcoded, for example
      * different users may need different authority endpoints or scopes
