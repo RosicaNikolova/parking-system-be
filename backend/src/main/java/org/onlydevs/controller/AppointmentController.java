@@ -7,6 +7,7 @@ import org.onlydevs.controller.DTO.AppointmentDTO;
 import org.onlydevs.controller.DTO.TimeSlotsEmployeeDateDTO;
 import org.onlydevs.controller.converters.AppointmentConverterDTO;
 import org.onlydevs.domain.Appointment;
+import org.onlydevs.outlook.OutlookCalendarService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

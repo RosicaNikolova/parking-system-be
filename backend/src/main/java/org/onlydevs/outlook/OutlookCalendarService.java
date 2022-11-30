@@ -19,6 +19,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 
@@ -173,6 +174,47 @@ public class OutlookCalendarService {
             System.out.println(String.format("Connection returned HTTP code: %s with message: %s",
                     httpResponseCode, conn.getResponseMessage()));
         }
+    }
+
+    public List<Appointment> getAppointments() throws IOException {
+        //URL url = new URL("https://graph.microsoft.com/beta/users/mikewangfontystest_outlook.com#EXT#@mikewangfontystestoutlook.onmicrosoft.com/calendar/events");
+        IAuthenticationResult result = null;
+        try {
+            result = getAccessTokenByClientCredentialGrant();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        String accessToken = result.accessToken();
+
+        URL url = new URL("https://graph.microsoft.com/v1.0/users/ca0dfa2b-a687-4448-95cf-c66cd08daf96/calendar/events");
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setDoOutput(true);
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+        conn.setRequestProperty("Content-Type","application/json");
+        conn.setRequestProperty("Accept","application/json");
+        conn.setRequestProperty("Prefer", "outlook.timezone=\"W. Europe Standard Time\"");
+
+        int httpResponseCode = conn.getResponseCode();
+        if(httpResponseCode == HTTPResponse.SC_OK) {
+            StringBuilder response;
+            try(BufferedReader in = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream()))){
+
+                String inputLine;
+                response = new StringBuilder();
+                while (( inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                System.out.println( response.toString());
+            }
+        } else {
+            System.out.println(String.format("Connection returned HTTP code: %s with message: %s",
+                    httpResponseCode, conn.getResponseMessage()));
+        }
+        return null;
     }
 
     /**
