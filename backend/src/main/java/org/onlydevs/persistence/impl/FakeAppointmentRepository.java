@@ -46,6 +46,7 @@ public class FakeAppointmentRepository implements AppointmentRepository {
         {
             toAdd = Appointment.builder()
                     .id(idIncrementor)
+                    .outlookAppointmentId(appointment.getOutlookAppointmentId())
                     .visitor(appointment.getVisitor())
                     .employee(appointment.getEmployee())
                     .comesByCar(appointment.getComesByCar())
