@@ -26,7 +26,8 @@ public class GetTimeSlotsForDateForEmployeeUseCase implements org.onlydevs.busin
             startTime=startTime.plusMinutes(30);
         }
 
-        List<Appointment> appointmentsForDate = appointmentRepository.getAppointmentsForDateForEmployee(employeeId, date);
+        List<Appointment> appointmentsForDate = null;
+                //appointmentRepository.getAppointmentsForDateForEmployee(employeeId, date);
         if(appointmentsForDate.isEmpty()){
             return time;
         }

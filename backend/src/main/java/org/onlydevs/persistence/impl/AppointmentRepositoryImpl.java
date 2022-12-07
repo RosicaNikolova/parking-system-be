@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,26 +33,59 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
 
     @Override
     public Appointment update(Long id, LocalDateTime newDateTime) {
-        return null;
+        AppointmentEntity appointmentEntity = appointmentRepositoryJPA.findById(id).orElse(null);
+        AppointmentEntity newAppointmentEntity = AppointmentEntity.builder()
+                .id(appointmentEntity.getId())
+                .outlookAppointmentId(appointmentEntity.getOutlookAppointmentId())
+                .email(appointmentEntity.getEmail())
+                .phoneNumber(appointmentEntity.getPhoneNumber())
+                .dateTime(newDateTime)
+                .employee(appointmentEntity.getEmployee())
+                .licensePlate(appointmentEntity.getLicensePlate())
+                .lastName(appointmentEntity.getLastName())
+                .firstName(appointmentEntity.getFirstName())
+                .comesByCar(appointmentEntity.getComesByCar())
+                .build();
+        return AppointmentConverter.convertToModel(appointmentRepositoryJPA.save(newAppointmentEntity));
     }
 
     @Override
     public List<Appointment> getAppointments() {
-        return null;
+        List<AppointmentEntity> appointmentEntities = appointmentRepositoryJPA.findAll();
+        List<Appointment> appointments = new ArrayList<>();
+        for(AppointmentEntity e : appointmentEntities)
+        {
+            Appointment appointment = AppointmentConverter.convertToModel(e);
+            appointments.add(appointment);
+        }
+        return appointments;
     }
 
     @Override
     public Optional<Appointment> getAppointment(Long id) {
-        return Optional.empty();
+        AppointmentEntity ae = appointmentRepositoryJPA.findById(id).get();
+        Optional<Appointment> appointment = Optional.of(AppointmentConverter.convertToModel(ae));
+        return appointment;
     }
 
     @Override
     public void delete(Long id) {
-
+        appointmentRepositoryJPA.deleteById(id);
     }
 
     @Override
-    public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDate date) {
-        return null;
+    public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDateTime date) {
+        List<AppointmentEntity> appointmentEntities = appointmentRepositoryJPA.findAll();
+        List<Appointment> appointments = new ArrayList<>();
+        for(AppointmentEntity e : appointmentEntities)
+        {
+            if(e.getEmployee().getId() == employeeId) {
+                if (e.getDateTime().toLocalDate().equals(date.toLocalDate())) {
+                    Appointment appointment = AppointmentConverter.convertToModel(e);
+                    appointments.add(appointment);
+                }
+            }
+        }
+        return appointments;
     }
 }

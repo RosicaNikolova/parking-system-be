@@ -8,11 +8,16 @@ import org.onlydevs.controller.DTO.TimeSlotsEmployeeDateDTO;
 import org.onlydevs.controller.converters.AppointmentConverterDTO;
 import org.onlydevs.domain.Appointment;
 import org.onlydevs.outlook.OutlookCalendarService;
+import org.onlydevs.persistence.AppointmentRepository;
+import org.onlydevs.persistence.AppointmentRepositoryJPA;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +37,7 @@ public class AppointmentController {
 
     private final DeleteAppointmentUseCase deleteAppointmentUseCase;
     private final GetTimeSlotsForDateForEmployeeUseCase getTimeSlotsForDateForEmployeeUseCase;
+    private final AppointmentRepository appointmentRepository;
 
     @CrossOrigin
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -99,16 +105,25 @@ public class AppointmentController {
         deleteAppointmentUseCase.deleteAppointment(id);
         return ResponseEntity.noContent().build();
     }
-    @CrossOrigin
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+//    @CrossOrigin
+//    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+////    public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@PathVariable Long id, @PathVariable int year, @PathVariable int month, @PathVariable int day) {
+//    public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@RequestParam Long id, @RequestParam int year, @RequestParam int month, @RequestParam int day) {
+//        LocalDate date = LocalDate.of(year, month, day);
+//        TimeSlotsEmployeeDateDTO timeSlots = TimeSlotsEmployeeDateDTO.builder()
+//                .timeSlots(getTimeSlotsForDateForEmployeeUseCase.timeSlotsForDate(id, date))
+//                .build();
+//
+//        return ResponseEntity.ok().body(timeSlots);
+//    }
+
+
 //    public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@PathVariable Long id, @PathVariable int year, @PathVariable int month, @PathVariable int day) {
-    public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@RequestParam Long id, @RequestParam int year, @RequestParam int month, @RequestParam int day) {
-        LocalDate date = LocalDate.of(year, month, day);
-        TimeSlotsEmployeeDateDTO timeSlots = TimeSlotsEmployeeDateDTO.builder()
-                .timeSlots(getTimeSlotsForDateForEmployeeUseCase.timeSlotsForDate(id, date))
-                .build();
-
-        return ResponseEntity.ok().body(timeSlots);
+    @GetMapping()
+    @ResponseBody
+    public ResponseEntity<List<Appointment>> getAvailableTimeSlots(@RequestParam Long id , @RequestParam int year, @RequestParam int month, @RequestParam int day) {
+        LocalDateTime date = LocalDateTime.of(year, month, day, 0,0,0);
+        List<Appointment> appointments = appointmentRepository.getAppointmentsForDateForEmployee(id, date);
+        return ResponseEntity.ok().body(appointments);
     }
-
 }

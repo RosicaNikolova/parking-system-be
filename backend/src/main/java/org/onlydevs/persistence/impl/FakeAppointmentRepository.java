@@ -95,9 +95,14 @@ public class FakeAppointmentRepository implements AppointmentRepository {
     }
 
     @Override
-    public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDate date) {
-       return appointments.stream()
-               .filter(appointment -> appointment.getEmployee().getId().equals(employeeId) && appointment.getDateTime().toLocalDate().equals(date))
-               .collect(Collectors.toList());
+    public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDateTime date) {
+        return null;
     }
+
+//    @Override
+//    public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDate date) {
+//       return appointments.stream()
+//               .filter(appointment -> appointment.getEmployee().getId().equals(employeeId) && appointment.getDateTime().toLocalDate().equals(date))
+//               .collect(Collectors.toList());
+//    }
 }

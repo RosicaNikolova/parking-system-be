@@ -17,5 +17,5 @@ public interface AppointmentRepository {
 
     void delete(Long id);
 
-    List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDate date);
+    List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDateTime date);
 }
