@@ -44,7 +44,6 @@ public class OutlookCalendarService {
     private static ConfidentialClientApplication app;
 
     public OutlookCalendarService(){
-
         try {
             setUpSampleData();
         } catch (IOException e) {

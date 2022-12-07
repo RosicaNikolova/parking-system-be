@@ -42,6 +42,7 @@ public class AppointmentController {
         appointmentDTO.firstNameVisitor = savedAppointment.getVisitor().getFirstName();
         appointmentDTO.lastNameVisitor = savedAppointment.getVisitor().getLastName();
         appointmentDTO.emailVisitor = savedAppointment.getVisitor().getEmail();
+        appointmentDTO.phoneVisitor = savedAppointment.getVisitor().getPhoneNumber();
         appointmentDTO.firstNameEmployee = savedAppointment.getEmployee().getFirstName();
         appointmentDTO.lastNameEmployee = savedAppointment.getEmployee().getLastName();
         appointmentDTO.dateTime = savedAppointment.getDateTime();
