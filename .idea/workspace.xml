@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="12f584fd-fcd2-4fea-8e24-d262b268051d" name="Changes" comment="Get Available Time Slots for Employee for a date">
+      <change beforePath="$PROJECT_DIR$/backend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/build.gradle" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/backend">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature-search-for-employee-last-name" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2GoEHm6cK6nbMebBBboWxEqFpnR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Rositsa/IdeaProjects/sioux/siouxprj-group-4/backend/src/main/java/org/onlydevs/security&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;3241ca6184e7e06d7e2313367e60913a&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Rositsa\IdeaProjects\sioux\siouxprj-group-4\backend\src\main\java\org\onlydevs\security" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.onlydevs.security.auth" />
+      <recent name="org.onlydevs.security" />
+      <recent name="org.onlydevs.domain" />
+      <recent name="org.onlydevs.business" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="backend.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.onlydevs.Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="12f584fd-fcd2-4fea-8e24-d262b268051d" name="Changes" comment="" />
+      <created>1667046457162</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667046457162</updated>
+      <workItem from="1667046459209" duration="400000" />
+      <workItem from="1667054657641" duration="149000" />
+      <workItem from="1667055250430" duration="146000" />
+      <workItem from="1667055534277" duration="65000" />
+      <workItem from="1667055612300" duration="3697000" />
+      <workItem from="1667059336632" duration="51000" />
+      <workItem from="1667068640446" duration="61000" />
+      <workItem from="1667761129045" duration="2104000" />
+      <workItem from="1667991775615" duration="1569000" />
+      <workItem from="1667996740177" duration="2202000" />
+      <workItem from="1668252012472" duration="5000" />
+      <workItem from="1668592544943" duration="5943000" />
+      <workItem from="1669025085598" duration="2523000" />
+      <workItem from="1669033543200" duration="7811000" />
+      <workItem from="1669114880408" duration="163000" />
+      <workItem from="1669198012100" duration="7000" />
+      <workItem from="1669747003531" duration="5316000" />
+      <workItem from="1670172455639" duration="9000" />
+      <workItem from="1670175705873" duration="600000" />
+      <workItem from="1670226697505" duration="25000" />
+      <workItem from="1670841550006" duration="1501000" />
+      <workItem from="1670843189457" duration="765000" />
+      <workItem from="1670843966555" duration="302000" />
+      <workItem from="1670844286090" duration="378000" />
+      <workItem from="1670844682921" duration="268000" />
+    </task>
+    <task id="LOCAL-00001" summary="Get Available Time Slots for Employee for a date">
+      <created>1669040749195</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669040749196</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="feature-getAppointments" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Get Appointments use case implemented" />
+    <MESSAGE value="Get Available Time Slots for Employee for a date" />
+    <option name="LAST_COMMIT_MESSAGE" value="Get Available Time Slots for Employee for a date" />
+  </component>
+</project>

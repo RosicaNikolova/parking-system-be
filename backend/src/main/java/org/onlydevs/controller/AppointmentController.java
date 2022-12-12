@@ -7,10 +7,12 @@ import org.onlydevs.controller.DTO.AppointmentDTO;
 import org.onlydevs.controller.DTO.TimeSlotsEmployeeDateDTO;
 import org.onlydevs.controller.converters.AppointmentConverterDTO;
 import org.onlydevs.domain.Appointment;
+import org.onlydevs.security.isauthenticated.IsAuthenticated;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +34,8 @@ public class AppointmentController {
     private final DeleteAppointmentUseCase deleteAppointmentUseCase;
     private final GetTimeSlotsForDateForEmployeeUseCase getTimeSlotsForDateForEmployeeUseCase;
 
+    //@IsAuthenticated
+    //@RolesAllowed("ROLE_secretary")
     @CrossOrigin
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody Appointment meeting)
@@ -48,6 +52,8 @@ public class AppointmentController {
         return ResponseEntity.ok().body(appointmentDTO);
     }
 
+    //@IsAuthenticated
+    //@RolesAllowed("ROLE_secretary")
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppointmentDTO> updateAppointment(@RequestBody Appointment appointment) {
         AppointmentDTO appointmentDTO = new AppointmentDTO();
@@ -64,6 +70,9 @@ public class AppointmentController {
 
         return ResponseEntity.ok().body(appointmentDTO);
     }
+
+    //@IsAuthenticated
+    //@RolesAllowed("ROLE_secretary")
     @CrossOrigin
     @GetMapping("/appointments")
     public ResponseEntity<ApointmentsDTO> getAppointment(){
@@ -80,6 +89,9 @@ public class AppointmentController {
         }
 
     }
+
+    //@IsAuthenticated
+    //@RolesAllowed("ROLE_secretary")
     @GetMapping("/{id}")
     public ResponseEntity<AppointmentDTO> getAppointment(@PathVariable(value = "id") final long id) {
 
@@ -92,11 +104,17 @@ public class AppointmentController {
             return ResponseEntity.ok().body(appointmentDTO.get());
         }
     }
+
+    //@IsAuthenticated
+    //@RolesAllowed("ROLE_secretary")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAppointment(@PathVariable final Long id) {
         deleteAppointmentUseCase.deleteAppointment(id);
         return ResponseEntity.noContent().build();
     }
+
+    //@IsAuthenticated
+    //@RolesAllowed("ROLE_secretary")
     @CrossOrigin
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@PathVariable Long id, @PathVariable int year, @PathVariable int month, @PathVariable int day) {
