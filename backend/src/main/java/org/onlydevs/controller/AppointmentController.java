@@ -22,7 +22,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/appointment")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class AppointmentController {
 
     private final CreateAppointmentUseCase createAppointmentUseCase;
