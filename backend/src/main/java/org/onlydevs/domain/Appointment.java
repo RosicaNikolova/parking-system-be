@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class Appointment {
 
     private Long id;
+    private String outlookAppointmentId;
     private Visitor visitor;
     private Employee employee;
     private Boolean comesByCar;

@@ -8,12 +8,19 @@ import org.onlydevs.controller.DTO.TimeSlotsEmployeeDateDTO;
 import org.onlydevs.controller.converters.AppointmentConverterDTO;
 import org.onlydevs.domain.Appointment;
 import org.onlydevs.security.isauthenticated.IsAuthenticated;
+import org.onlydevs.outlook.OutlookCalendarService;
+import org.onlydevs.persistence.AppointmentRepository;
+import org.onlydevs.persistence.AppointmentRepositoryJPA;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +40,7 @@ public class AppointmentController {
 
     private final DeleteAppointmentUseCase deleteAppointmentUseCase;
     private final GetTimeSlotsForDateForEmployeeUseCase getTimeSlotsForDateForEmployeeUseCase;
+    private final AppointmentRepository appointmentRepository;
 
     //@IsAuthenticated
     //@RolesAllowed("ROLE_secretary")
@@ -45,6 +53,7 @@ public class AppointmentController {
         appointmentDTO.firstNameVisitor = savedAppointment.getVisitor().getFirstName();
         appointmentDTO.lastNameVisitor = savedAppointment.getVisitor().getLastName();
         appointmentDTO.emailVisitor = savedAppointment.getVisitor().getEmail();
+        appointmentDTO.phoneVisitor = savedAppointment.getVisitor().getPhoneNumber();
         appointmentDTO.firstNameEmployee = savedAppointment.getEmployee().getFirstName();
         appointmentDTO.lastNameEmployee = savedAppointment.getEmployee().getLastName();
         appointmentDTO.dateTime = savedAppointment.getDateTime();
@@ -115,16 +124,14 @@ public class AppointmentController {
 
     //@IsAuthenticated
     //@RolesAllowed("ROLE_secretary")
-    @CrossOrigin
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@PathVariable Long id, @PathVariable int year, @PathVariable int month, @PathVariable int day) {
-    public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@RequestParam Long id, @RequestParam int year, @RequestParam int month, @RequestParam int day) {
+    @GetMapping()
+    @ResponseBody
+    public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@RequestParam Long id , @RequestParam int year, @RequestParam int month, @RequestParam int day) {
         LocalDate date = LocalDate.of(year, month, day);
-        TimeSlotsEmployeeDateDTO timeSlots = TimeSlotsEmployeeDateDTO.builder()
-                .timeSlots(getTimeSlotsForDateForEmployeeUseCase.timeSlotsForDate(id, date))
+//        List<Appointment> appointments = appointmentRepository.getAppointmentsForDateForEmployee(id, date);
+        TimeSlotsEmployeeDateDTO appointments = TimeSlotsEmployeeDateDTO.builder()
+                .timeSlots(getTimeSlotsForDateForEmployeeUseCase.timeSlotsForDate(id,date))
                 .build();
-
-        return ResponseEntity.ok().body(timeSlots);
+        return ResponseEntity.ok().body(appointments);
     }
-
 }

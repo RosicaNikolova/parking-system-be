@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Repository
 public class FakeAppointmentRepository implements AppointmentRepository {
     private final List<Appointment> appointments;
     private Long idIncrementor;
@@ -45,6 +44,7 @@ public class FakeAppointmentRepository implements AppointmentRepository {
         {
             toAdd = Appointment.builder()
                     .id(idIncrementor)
+                    .outlookAppointmentId(appointment.getOutlookAppointmentId())
                     .visitor(appointment.getVisitor())
                     .employee(appointment.getEmployee())
                     .comesByCar(appointment.getComesByCar())
@@ -95,8 +95,13 @@ public class FakeAppointmentRepository implements AppointmentRepository {
 
     @Override
     public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDate date) {
-       return appointments.stream()
-               .filter(appointment -> appointment.getEmployee().getId().equals(employeeId) && appointment.getDateTime().toLocalDate().equals(date))
-               .collect(Collectors.toList());
+        return null;
     }
+
+//    @Override
+//    public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDate date) {
+//       return appointments.stream()
+//               .filter(appointment -> appointment.getEmployee().getId().equals(employeeId) && appointment.getDateTime().toLocalDate().equals(date))
+//               .collect(Collectors.toList());
+//    }
 }
