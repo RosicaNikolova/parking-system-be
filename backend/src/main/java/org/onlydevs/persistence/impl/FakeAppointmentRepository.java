@@ -104,4 +104,14 @@ public class FakeAppointmentRepository implements AppointmentRepository {
 //               .filter(appointment -> appointment.getEmployee().getId().equals(employeeId) && appointment.getDateTime().toLocalDate().equals(date))
 //               .collect(Collectors.toList());
 //    }
+    @Override
+    public List<Employee> getEmployeesByLastName(String lastName) {
+        List<Employee> employees = new ArrayList<>();
+        for (Appointment appointment:this.appointments) {
+            if(appointment.getEmployee().getLastName().toLowerCase().contains(lastName.toLowerCase())){
+                employees.add(appointment.getEmployee());
+            }
+        }
+        return employees;
+    }
 }

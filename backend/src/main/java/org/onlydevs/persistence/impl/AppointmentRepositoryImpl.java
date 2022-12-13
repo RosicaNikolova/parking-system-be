@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.onlydevs.domain.Appointment;
+import org.onlydevs.domain.Employee;
 import org.onlydevs.persistence.AppointmentRepository;
 import org.onlydevs.persistence.AppointmentRepositoryJPA;
 import org.onlydevs.persistence.converter.AppointmentConverter;
@@ -87,5 +88,10 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
             }
         }
         return appointments;
+    }
+
+    @Override
+    public List<Employee> getEmployeesByLastName(String lastName) {
+        return null;
     }
 }
