@@ -15,6 +15,7 @@ public class AppointmentDTO {
     public String firstNameVisitor;
     public String lastNameVisitor;
     public String emailVisitor;
+    public Long employee_id;
 
     public String phoneVisitor;
     public String firstNameEmployee;

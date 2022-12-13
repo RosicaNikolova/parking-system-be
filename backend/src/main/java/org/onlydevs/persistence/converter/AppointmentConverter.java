@@ -45,9 +45,10 @@ public class AppointmentConverter {
                         .phoneNumber(appointmentEntity.getPhoneNumber())
                         .build())
                 .employee(Employee.builder()
-                        .firstName(appointmentEntity.getFirstName())
-                        .lastName(appointmentEntity.getLastName())
-                        .email(appointmentEntity.getEmail())
+                        .id(appointmentEntity.getEmployee().getId())
+                        .firstName(appointmentEntity.getEmployee().getFirstName())
+                        .lastName(appointmentEntity.getEmployee().getLastName())
+                        .email(appointmentEntity.getEmployee().getEmail())
                         .build())
                 .build();
         return appointment;
