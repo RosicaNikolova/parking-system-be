@@ -95,7 +95,7 @@ public class FakeAppointmentRepository implements AppointmentRepository {
     }
 
     @Override
-    public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDateTime date) {
+    public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDate date) {
         return null;
     }
 

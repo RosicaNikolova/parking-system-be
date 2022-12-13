@@ -26,8 +26,7 @@ public class GetTimeSlotsForDateForEmployeeUseCase implements org.onlydevs.busin
             startTime=startTime.plusMinutes(30);
         }
 
-        List<Appointment> appointmentsForDate = null;
-                //appointmentRepository.getAppointmentsForDateForEmployee(employeeId, date);
+        List<Appointment> appointmentsForDate = appointmentRepository.getAppointmentsForDateForEmployee(employeeId, date);
         if(appointmentsForDate.isEmpty()){
             return time;
         }
@@ -43,15 +42,30 @@ public class GetTimeSlotsForDateForEmployeeUseCase implements org.onlydevs.busin
 
             List <LocalTime> available = new ArrayList<>();
 
-            for(LocalTime timeslot: time){
-                for (Appointment appointment : appointmentsForDate){
-                    if(timeslot.getHour() != appointment.getDateTime().getHour() && timeslot.getMinute() != appointment.getDateTime().getMinute()){
-                        available.add(timeslot);
-                    }
+            for (Appointment a : appointmentsForDate )
+            {
+                if (time.contains(a.getDateTime().toLocalTime()))
+                {
+                    time.remove(a.getDateTime().toLocalTime());
                 }
-
             }
-            return available;
+
+
+//            for (Appointment appointment : appointmentsForDate){
+//                for(LocalTime timeslot: time){
+//                    if((timeslot != appointment.getDateTime().toLocalTime()))
+//                    {
+//                        if (!(available.contains(timeslot)))
+//                        {
+//                            available.add(timeslot);
+//                        }
+//                    }
+//                    //if(timeslot.getHour() != appointment.getDateTime().getHour() && timeslot.getMinute() != appointment.getDateTime().getMinute()){
+//                    //}
+//                }
+//
+//            }
+            return time;
 
         }
     }

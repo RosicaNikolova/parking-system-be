@@ -74,13 +74,13 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDateTime date) {
+    public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDate date) {
         List<AppointmentEntity> appointmentEntities = appointmentRepositoryJPA.findAll();
         List<Appointment> appointments = new ArrayList<>();
         for(AppointmentEntity e : appointmentEntities)
         {
             if(e.getEmployee().getId() == employeeId) {
-                if (e.getDateTime().toLocalDate().equals(date.toLocalDate())) {
+                if (e.getDateTime().toLocalDate().equals(date)) {
                     Appointment appointment = AppointmentConverter.convertToModel(e);
                     appointments.add(appointment);
                 }
