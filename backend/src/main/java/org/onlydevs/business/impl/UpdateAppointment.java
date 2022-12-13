@@ -20,12 +20,12 @@ public class UpdateAppointment implements UpdateAppointmentUseCase {
     private OutlookCalendarService outlookCalendarService;
 
     @Override
-    public Appointment updateAppointment(Long id, LocalDateTime newDateTime) {
+    public Appointment updateAppointment(Long id, LocalDateTime newDateTime, String licensePlate) {
         try {
             outlookCalendarService.editAppointment(appointmentRepository.getAppointment(id).orElse(null).getOutlookAppointmentId(), newDateTime);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return appointmentRepository.update(id, newDateTime);
+        return appointmentRepository.update(id, newDateTime, licensePlate);
     }
 }

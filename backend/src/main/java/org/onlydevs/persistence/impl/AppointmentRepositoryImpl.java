@@ -33,7 +33,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public Appointment update(Long id, LocalDateTime newDateTime) {
+    public Appointment update(Long id, LocalDateTime newDateTime, String licensePlate) {
         AppointmentEntity appointmentEntity = appointmentRepositoryJPA.findById(id).orElse(null);
         AppointmentEntity newAppointmentEntity = AppointmentEntity.builder()
                 .id(appointmentEntity.getId())
@@ -42,7 +42,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
                 .phoneNumber(appointmentEntity.getPhoneNumber())
                 .dateTime(newDateTime)
                 .employee(appointmentEntity.getEmployee())
-                .licensePlate(appointmentEntity.getLicensePlate())
+                .licensePlate(licensePlate)
                 .lastName(appointmentEntity.getLastName())
                 .firstName(appointmentEntity.getFirstName())
                 .comesByCar(appointmentEntity.getComesByCar())

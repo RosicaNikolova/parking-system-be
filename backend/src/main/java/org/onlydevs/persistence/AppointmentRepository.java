@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface AppointmentRepository {
     Appointment save(Appointment appointment);
 
-    Appointment update(Long id, LocalDateTime newDateTime);
+    Appointment update(Long id, LocalDateTime newDateTime, String licensePlate);
     List<Appointment> getAppointments();
 
     Optional<Appointment> getAppointment(Long id);

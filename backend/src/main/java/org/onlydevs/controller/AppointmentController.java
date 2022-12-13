@@ -66,7 +66,7 @@ public class AppointmentController {
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppointmentDTO> updateAppointment(@RequestBody Appointment appointment) {
         AppointmentDTO appointmentDTO = new AppointmentDTO();
-        Appointment updatedAppointment = updateAppointmentUseCase.updateAppointment(appointment.getId(), appointment.getDateTime());
+        Appointment updatedAppointment = updateAppointmentUseCase.updateAppointment(appointment.getId(), appointment.getDateTime(), appointment.getLicensePlate());
 
         appointmentDTO.firstNameVisitor = updatedAppointment.getVisitor().getFirstName();
         appointmentDTO.lastNameVisitor = updatedAppointment.getVisitor().getLastName();

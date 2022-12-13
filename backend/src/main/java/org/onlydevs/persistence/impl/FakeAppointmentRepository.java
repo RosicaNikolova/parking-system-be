@@ -56,6 +56,11 @@ public class FakeAppointmentRepository implements AppointmentRepository {
         return toAdd;
     }
 
+    @Override
+    public Appointment update(Long id, LocalDateTime newDateTime, String licensePlate) {
+        return null;
+    }
+
     public Appointment update(Long id, LocalDateTime newDateTime) {
         //Needs to be fixed, searches id on id of array
         Appointment existingAppointment = appointments.get(Math.toIntExact(id)-1);
