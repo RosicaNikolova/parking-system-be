@@ -90,4 +90,18 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         return appointments;
     }
 
+    @Override
+    public List<Appointment> getAppointmentsByDay(LocalDate date) {
+        List<AppointmentEntity> appointmentEntities = appointmentRepositoryJPA.findAll();
+        List<Appointment> appointments = new ArrayList<>();
+        for(AppointmentEntity e : appointmentEntities)
+        {
+            if (e.getDateTime().toLocalDate().equals(date)) {
+                Appointment appointment = AppointmentConverter.convertToModel(e);
+                appointments.add(appointment);
+            }
+        }
+        return appointments;
+    }
+
 }

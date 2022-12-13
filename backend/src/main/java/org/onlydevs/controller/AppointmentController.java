@@ -9,21 +9,13 @@ import org.onlydevs.controller.DTO.TimeSlotsEmployeeDateDTO;
 import org.onlydevs.controller.converters.AppointmentConverterDTO;
 import org.onlydevs.controller.converters.EmployeeConverterDTO;
 import org.onlydevs.domain.Appointment;
-import org.onlydevs.security.isauthenticated.IsAuthenticated;
-import org.onlydevs.outlook.OutlookCalendarService;
 import org.onlydevs.persistence.AppointmentRepository;
-import org.onlydevs.persistence.AppointmentRepositoryJPA;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.onlydevs.domain.Employee;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +35,8 @@ public class AppointmentController {
 
     private final DeleteAppointmentUseCase deleteAppointmentUseCase;
     private final GetTimeSlotsForDateForEmployeeUseCase getTimeSlotsForDateForEmployeeUseCase;
+    private final GetAppointmentsByDayUseCase getAppointmentsByDay;
+
     private final AppointmentRepository appointmentRepository;
 
     //@IsAuthenticated
@@ -100,6 +94,23 @@ public class AppointmentController {
             ApointmentsDTO response = new ApointmentsDTO(appointments.stream()
                             .map(appointment -> appointmentConverterDTO.convertToDTO(appointment))
                             .toList());
+            return ResponseEntity.ok(response);
+        }
+
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/appointments/{year}/{month}/{day}")
+    public ResponseEntity<ApointmentsDTO> getAppointmentByDay(@PathVariable("year") int year, @PathVariable("month") int month, @PathVariable("day") int day){
+        LocalDate date = LocalDate.of(year, month, day);
+        List<Appointment> appointments= getAppointmentsByDay.getAppointmentsByDay(date);
+        if (appointments.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        else{
+            ApointmentsDTO response = new ApointmentsDTO(appointments.stream()
+                    .map(appointment -> appointmentConverterDTO.convertToDTO(appointment))
+                    .toList());
             return ResponseEntity.ok(response);
         }
 

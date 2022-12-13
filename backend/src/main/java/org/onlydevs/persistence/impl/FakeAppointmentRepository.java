@@ -98,6 +98,11 @@ public class FakeAppointmentRepository implements AppointmentRepository {
         return null;
     }
 
+    @Override
+    public List<Appointment> getAppointmentsByDay(LocalDate date) {
+        return null;
+    }
+
 //    @Override
 //    public List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDate date) {
 //       return appointments.stream()
