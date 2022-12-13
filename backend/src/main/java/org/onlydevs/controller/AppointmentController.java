@@ -86,8 +86,8 @@ public class AppointmentController {
         return ResponseEntity.ok().body(appointmentDTO);
     }
 
-    @IsAuthenticated
-    @RolesAllowed("ROLE_secretary")
+//    @IsAuthenticated
+//    @RolesAllowed("ROLE_secretary")
     @CrossOrigin
     @GetMapping("/appointments")
     public ResponseEntity<ApointmentsDTO> getAppointment(){
