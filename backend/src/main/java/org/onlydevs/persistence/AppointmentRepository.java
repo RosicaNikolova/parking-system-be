@@ -20,5 +20,4 @@ public interface AppointmentRepository {
 
     List<Appointment> getAppointmentsForDateForEmployee(Long employeeId, LocalDate date);
 
-    List<Employee> getEmployeesByLastName(String lastName);
 }

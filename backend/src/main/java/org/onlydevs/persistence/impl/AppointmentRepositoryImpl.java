@@ -90,8 +90,4 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         return appointments;
     }
 
-    @Override
-    public List<Employee> getEmployeesByLastName(String lastName) {
-        return null;
-    }
 }
