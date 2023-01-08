@@ -17,4 +17,13 @@ public class EmployeeConverterDTO {
                 .email(employee.getEmail())
                 .build();
     }
+
+    public Employee convertToEmployee(EmployeeDTO employeeDTO){
+        return Employee.builder()
+                .id(employeeDTO.getId())
+                .firstName(employeeDTO.getFirstName())
+                .lastName(employeeDTO.getLastName())
+                .email(employeeDTO.getEmail())
+                .build();
+    }
 }

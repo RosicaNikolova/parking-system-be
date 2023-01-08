@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12f584fd-fcd2-4fea-8e24-d262b268051d" name="Changes" comment="Get Available Time Slots for Employee for a date">
-      <change beforePath="$PROJECT_DIR$/backend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,6 +124,8 @@
       <workItem from="1670843966555" duration="302000" />
       <workItem from="1670844286090" duration="378000" />
       <workItem from="1670844682921" duration="268000" />
+      <workItem from="1671023548998" duration="113000" />
+      <workItem from="1671101066663" duration="12000" />
     </task>
     <task id="LOCAL-00001" summary="Get Available Time Slots for Employee for a date">
       <created>1669040749195</created>

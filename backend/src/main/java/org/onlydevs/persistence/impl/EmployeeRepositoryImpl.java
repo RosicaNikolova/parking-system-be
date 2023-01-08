@@ -12,11 +12,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
 public class EmployeeRepositoryImpl implements EmployeeRepository {
     private final EmployeeRepositoryJPA employeeRepository;
+
     @Override
     public List<Employee> getEmployeesByLastName(String lastName) {
         List<Employee> employees = new ArrayList<>();
@@ -27,5 +29,41 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             }
         }
         return employees;
+    }
+
+    @Override
+    public List<Employee> getEmployees() {
+
+        return employeeRepository.findAll()
+                .stream()
+                .map(employeeEntity -> EmployeeConverter.convertToModel(employeeEntity))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Long createEmployee(Employee employee) {
+            EmployeeEntity employeeEntity = EmployeeEntity.builder()
+                    .firstName(employee.getFirstName())
+                    .lastName(employee.getLastName())
+                    .email(employee.getEmail())
+                    .build();
+            return employeeRepository.save(employeeEntity).getId();
+    }
+
+    @Override
+    public Employee updateEmployee(Employee employee) {
+        EmployeeEntity employeeEntity = EmployeeEntity.builder()
+                .id(employee.getId())
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .email(employee.getEmail())
+                .build();
+        EmployeeEntity employeeUpdated = employeeRepository.save(employeeEntity);
+        return EmployeeConverter.convertToModel(employeeUpdated);
+    }
+
+    @Override
+    public void deleteEmployee(Long employeeId) {
+        employeeRepository.deleteById(employeeId);
     }
 }
