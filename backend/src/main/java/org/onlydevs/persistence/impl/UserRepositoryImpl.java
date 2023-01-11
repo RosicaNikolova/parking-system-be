@@ -27,6 +27,7 @@ public class UserRepositoryImpl implements UserRepository {
 
         User u = User.builder()
                 .email(ue.getEmail())
+                .password(ue.getPassword())
                 .roles(roles)
                 .build();
         return Optional.of(u);
