@@ -17,4 +17,6 @@ public class CreateAccountRequestDTO {
     private String email;
     @NotBlank
     private String password;
+    private String role;
+
 }
