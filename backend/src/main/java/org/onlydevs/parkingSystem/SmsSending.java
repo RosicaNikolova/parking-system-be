@@ -10,7 +10,7 @@ public class SmsSending {
             Message message = Message.creator(
                             new com.twilio.type.PhoneNumber(receiverPhone),
                             new com.twilio.type.PhoneNumber("+18623527770"),
-                            "There are no available spots in the main parking. Please park in the parking down the street from here.")
+                            "There are no available spots in the main parking. Please head over to: https://goo.gl/maps/KU2Cbai2EBENwGHfA.")
                     .create();
 
             System.out.println(message.getSid());

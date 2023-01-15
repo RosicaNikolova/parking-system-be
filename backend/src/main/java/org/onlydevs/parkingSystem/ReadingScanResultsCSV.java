@@ -23,6 +23,8 @@ public class ReadingScanResultsCSV {
 
         SmsSending smsSending = new SmsSending();
 
+        final String[] lastPlate = {""};
+
         List<List<String>> readsFromCSV = new ArrayList<>();
         long timeLimit = 5000;//ms
         Timer timer = new Timer();
@@ -50,24 +52,26 @@ public class ReadingScanResultsCSV {
                         }
                     }
                     // we have a list of lists from the CSV reading, so we need to loop through each list and get the plate in it
-                    for (List<String> lists:
+                    for (List<String> licensePlateList:
                             readsFromCSV) {
 
-                        for (String str:
-                                lists) {
+                        for (String licensePlate:
+                                licensePlateList) {
 
-                            System.out.println(str);
                             for (Appointment appointment:
                                  appointments) {
 
                                 // we check each appointment if it has a matching plate with the current license plate iteration
                                 // and if the meeting is 15 minutes or less from now
-                                if(str.contains(appointment.getLicensePlate()) &&
+                                if(licensePlate.contains(appointment.getLicensePlate()) &&
                                         LocalDateTime.now().isBefore(appointment.getDateTime()) &&
-                                LocalDateTime.now().isAfter(appointment.getDateTime().minusMinutes(15))) {
+                                LocalDateTime.now().isAfter(appointment.getDateTime().minusMinutes(15)) &&
+                                        !Objects.equals(appointment.getLicensePlate(), lastPlate[0])) {
 
-                                    //sensors.start();
+                                    sensors.start();
+                                    System.out.println(licensePlate);
                                     smsSending.sendSMS(appointment.getVisitor().getPhoneNumber());
+                                    lastPlate[0] = appointment.getLicensePlate();
                                 }
                             }
                         }
