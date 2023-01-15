@@ -66,7 +66,7 @@ public class ReadingScanResultsCSV {
                                         LocalDateTime.now().isBefore(appointment.getDateTime()) &&
                                 LocalDateTime.now().isAfter(appointment.getDateTime().minusMinutes(15))) {
 
-                                    sensors.start();
+                                    //sensors.start();
                                     smsSending.sendSMS(appointment.getVisitor().getPhoneNumber());
                                 }
                             }

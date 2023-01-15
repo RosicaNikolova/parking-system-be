@@ -6,7 +6,7 @@ import com.twilio.type.PhoneNumber;
 public class SmsSending {
 
         public void sendSMS(String receiverPhone) {
-            Twilio.init("AC8ce25c0f4f8226f11b8c75f2a83bb089", "c1ac13ac1a63e16255ff0bb5ce45472c");
+            Twilio.init("AC8ce25c0f4f8226f11b8c75f2a83bb089", "bce2dfe169829aab115e2904471be996");
             Message message = Message.creator(
                             new com.twilio.type.PhoneNumber(receiverPhone),
                             new com.twilio.type.PhoneNumber("+18623527770"),
