@@ -22,8 +22,8 @@ public class FakeAppointmentRepository implements AppointmentRepository {
         appointments = new ArrayList<>();
         appointments.add(Appointment.builder().id(1l)
                 .visitor(
-                        Visitor.builder().firstName("Visitor1FirstName").lastName("Visitor1LastName").email("Visitor1@outlook.com").phoneNumber("0612345678").build())
-                        .comesByCar(false).licensePlate("XX-999-999").dateTime(LocalDateTime.parse("2022-11-21T10:30:00"))
+                        Visitor.builder().firstName("Visitor1FirstName").lastName("Visitor1LastName").email("Visitor1@outlook.com").phoneNumber("+359884832010").build())
+                        .comesByCar(false).licensePlate("02-DMJ-9").dateTime(LocalDateTime.parse("2023-01-04T17:55:00"))
                 .employee(
                         Employee.builder().id(1L).firstName("Casper").lastName("Smithovski").email("Casper@hotmail.com").build()
                 ).build());

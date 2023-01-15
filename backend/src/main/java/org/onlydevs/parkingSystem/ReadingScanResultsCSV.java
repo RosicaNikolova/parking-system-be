@@ -21,7 +21,9 @@ public class ReadingScanResultsCSV {
     @PostConstruct
     public void readCSV() {
 
-        List<Appointment> appointments = getAppointmentsByDayUseCase.getAppointmentsByDay(LocalDate.now());
+        SmsSending smsSending = new SmsSending();
+
+        final String[] lastPlate = {""};
 
         List<List<String>> readsFromCSV = new ArrayList<>();
         long timeLimit = 5000;//ms
@@ -29,6 +31,8 @@ public class ReadingScanResultsCSV {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+
+                List<Appointment> appointments = getAppointmentsByDayUseCase.getAppointmentsByDay(LocalDate.now());
 
                 Sensors sensors = new Sensors();
 
@@ -40,23 +44,34 @@ public class ReadingScanResultsCSV {
                     String[] nextLine;
                     //reads one line at a time
                     while ((nextLine = reader.readNext()) != null) {
+                        // for each line in the csv we check if the plate(token) has 12 characters and if it's already in the list
                         for (String token : nextLine) {
                             if(token.length() == 12 && !readsFromCSV.contains(Arrays.asList(token))) {
                                 readsFromCSV.add(Arrays.asList(token));
                             }
                         }
                     }
-                    for (List<String> lists:
+                    // we have a list of lists from the CSV reading, so we need to loop through each list and get the plate in it
+                    for (List<String> licensePlateList:
                             readsFromCSV) {
-                        for (String str:
-                                lists) {
-                            System.out.println(str);
+
+                        for (String licensePlate:
+                                licensePlateList) {
+
                             for (Appointment appointment:
                                  appointments) {
-                                if(str.contains(appointment.getLicensePlate()) &&
+
+                                // we check each appointment if it has a matching plate with the current license plate iteration
+                                // and if the meeting is 15 minutes or less from now
+                                if(licensePlate.contains(appointment.getLicensePlate()) &&
                                         LocalDateTime.now().isBefore(appointment.getDateTime()) &&
-                                LocalDateTime.now().isAfter(appointment.getDateTime().minusMinutes(15))) {
+                                LocalDateTime.now().isAfter(appointment.getDateTime().minusMinutes(15)) &&
+                                        !Objects.equals(appointment.getLicensePlate(), lastPlate[0])) {
+
                                     sensors.start();
+                                    System.out.println(licensePlate);
+                                    smsSending.sendSMS(appointment.getVisitor().getPhoneNumber());
+                                    lastPlate[0] = appointment.getLicensePlate();
                                 }
                             }
                         }
