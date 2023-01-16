@@ -15,6 +15,7 @@ public class AppointmentConverter {
                 .id(appointment.getId())
                 .outlookAppointmentId(appointment.getOutlookAppointmentId())
                 .dateTime(appointment.getDateTime())
+                .endTime(appointment.getEndTime())
                 .licensePlate(appointment.getLicensePlate())
                 .comesByCar(appointment.getComesByCar())
 
@@ -34,6 +35,7 @@ public class AppointmentConverter {
                 .id(appointmentEntity.getId())
                 .outlookAppointmentId(appointmentEntity.getOutlookAppointmentId())
                 .dateTime(appointmentEntity.getDateTime())
+                .endTime(appointmentEntity.getEndTime())
                 .licensePlate(appointmentEntity.getLicensePlate())
                 .comesByCar(appointmentEntity.getComesByCar())
 

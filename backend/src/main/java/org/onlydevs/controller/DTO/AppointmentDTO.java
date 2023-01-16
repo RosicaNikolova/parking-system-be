@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Builder
 @AllArgsConstructor
@@ -22,5 +23,6 @@ public class AppointmentDTO {
     public String lastNameEmployee;
     public Boolean comesByCar;
     public LocalDateTime dateTime;
+    public LocalTime endTime;
 
 }

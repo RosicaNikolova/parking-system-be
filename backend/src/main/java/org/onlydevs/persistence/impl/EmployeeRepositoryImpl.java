@@ -2,8 +2,6 @@ package org.onlydevs.persistence.impl;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.onlydevs.controller.DTO.EmployeeDTO;
-import org.onlydevs.domain.Appointment;
 import org.onlydevs.domain.Employee;
 import org.onlydevs.persistence.EmployeeRepository;
 import org.onlydevs.persistence.EmployeeRepositoryJPA;
