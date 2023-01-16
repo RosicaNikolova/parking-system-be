@@ -18,6 +18,15 @@ public class GetTimeSlotsForDateForEmployeeUseCase implements org.onlydevs.busin
 
     @Override
     public List<LocalTime> timeSlotsForDate(Long employeeId, LocalDate date) {
+//
+//            LocalTime start = startime;
+//            List<LocalTime> times = new ArrayList<>();
+//            for(int i = 0; i<4; i++){
+//                times.add(start);
+//                start = start.plusMinutes(duration);
+//            }
+
+ //           old code
         LocalTime startTime = LocalTime.of(9, 0);
 
         List<LocalTime>time = new ArrayList<>();
