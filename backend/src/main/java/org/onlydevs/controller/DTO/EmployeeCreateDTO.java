@@ -5,18 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import javax.validation.constraints.NotBlank;
-
-@Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class CreateAccountRequestDTO {
+@NoArgsConstructor
+@Data
+public class EmployeeCreateDTO {
     @NotBlank
-    private String email;
+    public String firstName;
     @NotBlank
-    private String password;
-    private String role;
-
+    public String lastName;
+    @NotBlank
+    public String email;
 }

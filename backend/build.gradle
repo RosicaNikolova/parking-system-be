@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.7.3'
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
     id 'java'
+    id "org.flywaydb.flyway" version "8.5.9"
 
 }
 apply plugin: 'org.springframework.boot'
@@ -11,6 +12,14 @@ group 'org.onlydevs'
 version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
+}
+
+flyway {
+    driver = 'org.mysql.jdbc.driver'
+    user = 'root'
+    password = '1234Qwerty!'
+    url = 'jdbc:mysql://localhost:3306/s3onlydevs'
+    validateOnMigrate = false
 }
 
 dependencies {
