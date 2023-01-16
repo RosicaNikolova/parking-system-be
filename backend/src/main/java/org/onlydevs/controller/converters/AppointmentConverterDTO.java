@@ -19,16 +19,17 @@ public final class AppointmentConverterDTO {
                 .lastNameEmployee(appointment.getEmployee().getLastName())
                 .employee_id(appointment.getEmployee().getId())
                 .dateTime(appointment.getDateTime())
+                .endTime(appointment.getEndTime())
                 .emailVisitor(appointment.getVisitor().getEmail())
                 .phoneVisitor(appointment.getVisitor().getPhoneNumber())
                 .comesByCar(appointment.getComesByCar())
                 .build();
     }
 
-    public Appointment convertToAppointments (AppointmentDTO dto){
-
-        return null;
-
-    }
+//    public Appointment convertToAppointments (AppointmentDTO dto){
+//
+//        return null;
+//
+//    }
 
 }

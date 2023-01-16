@@ -32,6 +32,7 @@ CREATE TABLE appointment
     licenseplate varchar(50),
     outlookappointmentid varchar(200),
     datetime datetime,
+    endtime time,
     firstname varchar(50),
     lastname varchar(50),
     email varchar(50),

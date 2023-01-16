@@ -3,6 +3,7 @@ package org.onlydevs.domain;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Builder
 @Getter
@@ -16,6 +17,7 @@ public class Appointment {
     private Boolean comesByCar;
     private String licensePlate;
     private LocalDateTime dateTime;
+    private LocalTime endTime;
 
     public Visitor getVisitor() {
         return visitor;

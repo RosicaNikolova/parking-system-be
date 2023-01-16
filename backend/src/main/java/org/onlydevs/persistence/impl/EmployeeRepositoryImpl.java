@@ -2,7 +2,6 @@ package org.onlydevs.persistence.impl;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.onlydevs.domain.Appointment;
 import org.onlydevs.domain.Employee;
 import org.onlydevs.persistence.EmployeeRepository;
 import org.onlydevs.persistence.EmployeeRepositoryJPA;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -65,5 +65,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public void deleteEmployee(Long employeeId) {
         employeeRepository.deleteById(employeeId);
+    }
+
+    @Override
+    public Optional<Employee> getEmployee(Long id) {
+        Optional<EmployeeEntity> entity = employeeRepository.findById(id);
+        Employee employee = Employee.builder()
+                .id(entity.get().getId())
+                .email(entity.get().getEmail())
+                .lastName(entity.get().getLastName())
+                .firstName(entity.get().getFirstName())
+                .build();
+        return  Optional.of(employee);
     }
 }
