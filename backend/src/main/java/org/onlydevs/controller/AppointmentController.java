@@ -9,12 +9,16 @@ import org.onlydevs.controller.DTO.TimeSlotsEmployeeDateDTO;
 import org.onlydevs.controller.converters.AppointmentConverterDTO;
 import org.onlydevs.controller.converters.EmployeeConverterDTO;
 import org.onlydevs.domain.Appointment;
+import org.onlydevs.outlook.MailContent;
+import org.onlydevs.outlook.OutlookCalendarService;
 import org.onlydevs.persistence.AppointmentRepository;
 import org.onlydevs.domain.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +48,9 @@ public class AppointmentController {
     private final GetEmployeesByLastNameUseCase getEmployeesByLastNameUseCase;
 
     private final EmployeeConverterDTO employeeConverterDTO;
+
+    @Autowired
+    private final OutlookCalendarService outlookCalendarService;
     @CrossOrigin
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody Appointment meeting)
@@ -164,5 +171,13 @@ public class AppointmentController {
                 .build();
 
         return ResponseEntity.ok().body(employeesByLastNameDTO);
+    }
+    @PostMapping("/test")
+    public ResponseEntity<String> getEmployeesByLastName(@RequestBody MailContent mail) throws IOException {
+
+
+        outlookCalendarService.sendEmail(mail);
+
+        return ResponseEntity.ok().body("test");
     }
 }

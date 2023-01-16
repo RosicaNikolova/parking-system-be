@@ -343,6 +343,69 @@ public class OutlookCalendarService {
         return null;
     }
 
+    public OutlookAppointment sendEmail(MailContent mail) throws IOException {
+        //URL url = new URL("https://graph.microsoft.com/beta/users/mikewangfontystest_outlook.com#EXT#@mikewangfontystestoutlook.onmicrosoft.com/calendar/events");
+        IAuthenticationResult result = null;
+        try {
+            result = getAccessTokenByClientCredentialGrant();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        OutlookAppointment outlookAppointment = null;
+        String accessToken = result.accessToken();
+
+        URL url = new URL("https://graph.microsoft.com/v1.0/users/ca0dfa2b-a687-4448-95cf-c66cd08daf96/sendMail");
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setDoOutput(true);
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+        conn.setRequestProperty("Content-Type","application/json");
+        String jsonInputString =
+                "{\n" +
+                    "\"message\": \n" +
+                    "{\n" +
+                        "\"subject\": \""+mail.subject+"\",\n" +
+                        "  \"body\": {\n" +
+                        "    \"contentType\": \""+mail.contentType+"\",\n" +
+                        "    \"content\": \""+mail.content+"\"\n" +
+                        "  },\n" +
+                        "  \"toRecipients\": [\n" +
+                        "{\n" +
+                        "    \"emailAddress\": {\n" +
+                        "    \"address\": \""+mail.toEmail+"\"\n" +
+                            "  }\n" +
+                        "}\n" +
+                        "  ]\n" +
+                    "}\n" +
+                "}";
+
+        try(OutputStream os = conn.getOutputStream()) {
+            byte[] input = jsonInputString.getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+
+        int httpResponseCode = conn.getResponseCode();
+        if(httpResponseCode == HTTPResponse.SC_CREATED) {
+            StringBuilder response;
+            Gson g = new Gson();
+            try(BufferedReader in = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream()))){
+
+                String inputLine;
+                response = new StringBuilder();
+                while (( inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                outlookAppointment = g.fromJson(response.toString(), OutlookAppointment.class);
+            }
+        } else {
+            System.out.println(String.format("Connection returned HTTP code: %s with message: %s",
+                    httpResponseCode, conn.getResponseMessage()));
+        }
+        return outlookAppointment;
+    }
+
     /**
      * Helper function unique to this sample setting. In a real application these wouldn't be so hardcoded, for example
      * different users may need different authority endpoints or scopes
