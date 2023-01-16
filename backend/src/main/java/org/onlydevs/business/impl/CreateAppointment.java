@@ -31,6 +31,7 @@ public class CreateAppointment implements CreateAppointmentUseCase {
             .comesByCar(appointment.getComesByCar())
             .licensePlate(appointment.getLicensePlate())
             .dateTime(appointment.getDateTime())
+                    .endTime(appointment.getEndTime())
             .build();
         } catch (IOException e) {
             throw new RuntimeException(e);

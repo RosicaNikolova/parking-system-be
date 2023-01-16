@@ -79,20 +79,48 @@ public class GetTimeSlotsForDateForEmployeeUseCase implements org.onlydevs.busin
         List<LocalTime> possible = new ArrayList<>();
         for (int i = 0; i<4; i++){
             startTime = startTime.plusMinutes(15);
-                possible.add(startTime);
+            possible.add(startTime);
         }
-
-
-        for (LocalTime takenTimeSlot : taken )
-        {
-            if (possible.contains(takenTimeSlot))
-            {
-                possible.remove(takenTimeSlot);
+        if(taken.isEmpty()){
+            return possible;
+        }
+        else {
+            System.out.println("Taken: " + taken);
+            taken.remove(0);
+            System.out.println("Taken: " + taken);
+            for (LocalTime takenTimeSlot : taken) {
+                if (possible.contains(takenTimeSlot)) {
+                    possible.remove(takenTimeSlot);
+                }
             }
-        }
-        System.out.println("Taken: " + taken);
-        System.out.println("Possible: " + possible);
-        return possible;
+
+            int lastIndex = taken.size() - 1;
+            if(lastIndex <0) {
+                return possible;
+            }
+                LocalTime lastTakenTime = taken.get(lastIndex);
+                List<LocalTime> finalEndTimes = new ArrayList<>();
+                if (possible.size() != 4) {
+                    for (LocalTime time : possible) {
+                        if (time.isAfter(lastTakenTime)) {
+
+                        } else {
+                            finalEndTimes.add(time);
+                        }
+                    }
+                } else {
+                    finalEndTimes = possible;
+                }
+                System.out.println("Taken: " + taken);
+
+                System.out.println("New times: " + finalEndTimes);
+
+                System.out.println("Possible: " + possible);
+                return finalEndTimes;
+            }
+
+
+
     }
 
     private List<LocalTime> getTakenTimeSlots( List<Appointment> appointmentsForDate){
