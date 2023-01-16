@@ -19,9 +19,9 @@ public class CreateAccount implements CreateAccountUseCase {
     @Override
     public Long register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        List<String> roles = new ArrayList<>();
-        roles.add("secretary");
-        user.setRoles(roles);
+//        List<String> roles = new ArrayList<>();
+//        roles.add("secretary");
+//        user.setRoles(roles);
         return userRepository.save(user);
     }
 }

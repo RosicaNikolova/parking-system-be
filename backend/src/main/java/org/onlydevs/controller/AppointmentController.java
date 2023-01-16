@@ -147,10 +147,10 @@ public class AppointmentController {
     public ResponseEntity<TimeSlotsEmployeeDateDTO> getAvailableTimeSlots(@RequestParam Long id , @RequestParam int year, @RequestParam int month, @RequestParam int day) {
         LocalDate date = LocalDate.of(year, month, day);
 //        List<Appointment> appointments = appointmentRepository.getAppointmentsForDateForEmployee(id, date);
-        TimeSlotsEmployeeDateDTO appointments = TimeSlotsEmployeeDateDTO.builder()
+        TimeSlotsEmployeeDateDTO timeslots = TimeSlotsEmployeeDateDTO.builder()
                 .timeSlots(getTimeSlotsForDateForEmployeeUseCase.timeSlotsForDate(id,date))
                 .build();
-        return ResponseEntity.ok().body(appointments);
+        return ResponseEntity.ok().body(timeslots);
     }
     @GetMapping("/employees/{lastName}")
     public ResponseEntity<EmployeesByLastNameDTO> getEmployeesByLastName(@PathVariable String lastName) {
