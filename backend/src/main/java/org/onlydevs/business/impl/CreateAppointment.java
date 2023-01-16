@@ -3,8 +3,6 @@ package org.onlydevs.business.impl;
 import lombok.AllArgsConstructor;
 import org.onlydevs.business.CreateAppointmentUseCase;
 import org.onlydevs.domain.Appointment;
-import org.onlydevs.domain.Employee;
-import org.onlydevs.domain.Visitor;
 import org.onlydevs.outlook.OutlookCalendarService;
 import org.onlydevs.persistence.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;

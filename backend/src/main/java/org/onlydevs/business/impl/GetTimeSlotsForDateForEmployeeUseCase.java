@@ -18,55 +18,97 @@ public class GetTimeSlotsForDateForEmployeeUseCase implements org.onlydevs.busin
 
     @Override
     public List<LocalTime> timeSlotsForDate(Long employeeId, LocalDate date) {
+//
+//            LocalTime start = startime;
+//            List<LocalTime> times = new ArrayList<>();
+//            for(int i = 0; i<4; i++){
+//                times.add(start);
+//                start = start.plusMinutes(duration);
+//            }
+
+ //           old code
         LocalTime startTime = LocalTime.of(9, 0);
 
         List<LocalTime>time = new ArrayList<>();
-        for(int i=0; i<16; i++){
+        for(int i=0; i<32; i++){
             time.add(startTime);
-            startTime=startTime.plusMinutes(30);
+            startTime=startTime.plusMinutes(15);
         }
 
         List<Appointment> appointmentsForDate = appointmentRepository.getAppointmentsForDateForEmployee(employeeId, date);
-        if(appointmentsForDate.isEmpty()){
+//
+//        List<LocalTime> takenTimeslots = new ArrayList<>();
+//        for(Appointment a: appointmentsForDate){
+//            LocalTime takenTime = a.getDateTime().toLocalTime();
+//            LocalTime endTime = a.getEndTime();
+//            takenTimeslots.add(takenTime);
+//            for (int i =0; i< 3; i++){
+//                takenTime = takenTime.plusMinutes(15);
+//                if(takenTime.equals(endTime)){
+//                    break;
+//                }
+//                    takenTimeslots.add(takenTime);
+//            }
+//        }
+//        System.out.println("taken: " + takenTimeslots);
+
+
+        List<LocalTime> takenTimeSlots = getTakenTimeSlots(appointmentsForDate);
+
+        if(takenTimeSlots.isEmpty()){
             return time;
         }
         else {
 
-//            List<LocalTime> availableTimeSlots =
-//                    time.stream()
-//                            .filter(
-//                                    appointment -> appointmentsForDate.stream()
-//                                            .anyMatch(meeting -> meeting.getDateTime().getHour() != appointment.getHour() || meeting.getDateTime().getMinute() != appointment.getMinute()))
-//                            .collect(Collectors.toList());
-//           // return availableTimeSlots;
-
-            List <LocalTime> available = new ArrayList<>();
-
-            for (Appointment a : appointmentsForDate )
+            for (LocalTime takenTimeSlot : takenTimeSlots )
             {
-                if (time.contains(a.getDateTime().toLocalTime()))
+                if (time.contains(takenTimeSlot))
                 {
-                    time.remove(a.getDateTime().toLocalTime());
+                    time.remove(takenTimeSlot);
                 }
             }
-
-
-//            for (Appointment appointment : appointmentsForDate){
-//                for(LocalTime timeslot: time){
-//                    if((timeslot != appointment.getDateTime().toLocalTime()))
-//                    {
-//                        if (!(available.contains(timeslot)))
-//                        {
-//                            available.add(timeslot);
-//                        }
-//                    }
-//                    //if(timeslot.getHour() != appointment.getDateTime().getHour() && timeslot.getMinute() != appointment.getDateTime().getMinute()){
-//                    //}
-//                }
-//
-//            }
             return time;
-
         }
+    }
+
+    @Override
+    public List<LocalTime> endTimeSlots(LocalTime startTime, Long employeeId, LocalDate date) {
+        List<Appointment> appointmentsForDate = appointmentRepository.getAppointmentsForDateForEmployee(employeeId, date);
+        List<LocalTime> taken = getTakenTimeSlots(appointmentsForDate);
+
+        List<LocalTime> possible = new ArrayList<>();
+        for (int i = 0; i<4; i++){
+            startTime = startTime.plusMinutes(15);
+                possible.add(startTime);
+        }
+
+
+        for (LocalTime takenTimeSlot : taken )
+        {
+            if (possible.contains(takenTimeSlot))
+            {
+                possible.remove(takenTimeSlot);
+            }
+        }
+        System.out.println("Taken: " + taken);
+        System.out.println("Possible: " + possible);
+        return possible;
+    }
+
+    private List<LocalTime> getTakenTimeSlots( List<Appointment> appointmentsForDate){
+        List<LocalTime> takenTimeslots = new ArrayList<>();
+        for(Appointment a: appointmentsForDate){
+            LocalTime takenTime = a.getDateTime().toLocalTime();
+            LocalTime endTime = a.getEndTime();
+            takenTimeslots.add(takenTime);
+            for (int i =0; i< 3; i++){
+                takenTime = takenTime.plusMinutes(15);
+                if(takenTime.equals(endTime)){
+                    break;
+                }
+                takenTimeslots.add(takenTime);
+            }
+        }
+        return takenTimeslots;
     }
 }

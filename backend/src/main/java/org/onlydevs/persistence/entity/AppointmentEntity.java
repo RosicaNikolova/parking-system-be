@@ -5,6 +5,7 @@ import org.onlydevs.domain.Employee;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Builder
@@ -29,6 +30,9 @@ public class AppointmentEntity {
 
     @Column(name = "datetime", columnDefinition = "TIMESTAMP")
     private LocalDateTime dateTime;
+
+    @Column(name = "endtime", columnDefinition = "TIMESTAMP")
+    private LocalTime endTime;
 
     @Column(name = "firstname")
     private String firstName;
