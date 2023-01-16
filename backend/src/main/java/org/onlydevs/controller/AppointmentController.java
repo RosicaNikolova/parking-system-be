@@ -9,12 +9,16 @@ import org.onlydevs.controller.DTO.TimeSlotsEmployeeDateDTO;
 import org.onlydevs.controller.converters.AppointmentConverterDTO;
 import org.onlydevs.controller.converters.EmployeeConverterDTO;
 import org.onlydevs.domain.Appointment;
+import org.onlydevs.outlook.MailContent;
+import org.onlydevs.outlook.OutlookCalendarService;
 import org.onlydevs.persistence.AppointmentRepository;
 import org.onlydevs.domain.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -43,6 +47,7 @@ public class AppointmentController {
     private final GetEmployeesByLastNameUseCase getEmployeesByLastNameUseCase;
 
     private final EmployeeConverterDTO employeeConverterDTO;
+
     @CrossOrigin
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody Appointment meeting)
