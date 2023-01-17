@@ -127,6 +127,7 @@ public class OutlookCalendarService {
 
         URL url = new URL("https://graph.microsoft.com/v1.0/users/ca0dfa2b-a687-4448-95cf-c66cd08daf96/calendar/events");
 
+        LocalDateTime endtime = LocalDateTime.of(appointment.getDateTime().toLocalDate(), appointment.getEndTime());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setDoOutput(true);
         conn.setRequestMethod("POST");
@@ -145,7 +146,7 @@ public class OutlookCalendarService {
                 "      \"timeZone\": \"W. Europe Standard Time\"\n" +
                 "  },\n" +
                 "  \"end\": {\n" +
-                "      \"dateTime\": \""+appointment.getDateTime().plusMinutes(30).toString()+":00\",\n" +
+                "      \"dateTime\": \""+endtime.toString()+":00\",\n" +
                 "      \"timeZone\": \"W. Europe Standard Time\"\n" +
                 "  },\n" +
                 "  \"location\":{\n" +
@@ -154,8 +155,8 @@ public class OutlookCalendarService {
                 "  \"attendees\": [\n" +
                 "    {\n" +
                 "      \"emailAddress\": {\n" +
-                "        \"address\":\"mw-3@hotmail.nl\",\n" +
-                "        \"name\": \"Mike Wang\"\n" +
+                "        \"address\":\"onlydevsemployee@outlook.com\",\n" +
+                "        \"name\": \"Employee\"\n" +
                 "      },\n" +
                 "      \"type\": \"required\"\n" +
                 "    }\n" +

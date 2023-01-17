@@ -36,10 +36,10 @@ public class InitializeDataDB implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        createEmployee();
-        registerAdminAccount();
-        registerSecretaryAccount();
-        createAppointment();
+//        createEmployee();
+//        registerAdminAccount();
+//        registerSecretaryAccount();
+//        createAppointment();
     }
 
     public Long registerSecretaryAccount()

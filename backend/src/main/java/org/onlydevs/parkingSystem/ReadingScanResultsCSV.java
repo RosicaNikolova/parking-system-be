@@ -98,7 +98,7 @@ public class ReadingScanResultsCSV {
                                                                 .subject("Client meeting with " + appointment.getVisitor().getFirstName() + " " + appointment.getVisitor().getLastName())
                                                                 .content("The client will be in the lobby in approximately 10 minutes.")
                                                                 .contentType("Text")
-                                                                .toEmail("danito22231@gmail.com")
+                                                                .toEmail("onlydevsdummy@outlook.com")
                                                                 .build());
                                                         smsSending.sendSMS(appointment.getVisitor().getPhoneNumber(), "There are currently no available guest spots in the main parking. Please head over to: https://goo.gl/maps/KU2Cbai2EBENwGHfA");
                                                     }
@@ -106,7 +106,7 @@ public class ReadingScanResultsCSV {
                                                         outlook.sendEmail(MailContent.builder()
                                                                 .subject("Client meeting with " + appointment.getVisitor().getFirstName() + " " + appointment.getVisitor().getLastName())
                                                                 .content("The client will be in the lobby in approximately 2 minutes.")
-                                                                .toEmail("danito22231@gmail.com")
+                                                                .toEmail("onlydevsdummy@outlook.com")
                                                                 .contentType("Text")
                                                                 .build());
                                                         smsSending.sendSMS(appointment.getVisitor().getPhoneNumber(), "You can park at the designated guest spaces.");
