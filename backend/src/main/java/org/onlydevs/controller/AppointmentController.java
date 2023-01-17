@@ -13,11 +13,13 @@ import org.onlydevs.outlook.MailContent;
 import org.onlydevs.outlook.OutlookCalendarService;
 import org.onlydevs.persistence.AppointmentRepository;
 import org.onlydevs.domain.Employee;
+import org.onlydevs.security.isauthenticated.IsAuthenticated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -48,7 +50,8 @@ public class AppointmentController {
 
     private final EmployeeConverterDTO employeeConverterDTO;
 
-    @CrossOrigin
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_SECRETARY"})
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody Appointment meeting)
     {
