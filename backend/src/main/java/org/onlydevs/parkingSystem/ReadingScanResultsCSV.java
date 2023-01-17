@@ -3,6 +3,9 @@ package org.onlydevs.parkingSystem;
 import com.opencsv.CSVReader;
 import org.onlydevs.business.GetAppointmentsByDayUseCase;
 import org.onlydevs.domain.Appointment;
+import org.onlydevs.domain.OutlookAppointment;
+import org.onlydevs.outlook.MailContent;
+import org.onlydevs.outlook.OutlookCalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +28,9 @@ public class ReadingScanResultsCSV {
 
     public static String output;
 
+    @Autowired
+    private OutlookCalendarService outlook;
+
     @PostConstruct
     public void readCSV() {
 
@@ -43,17 +49,7 @@ public class ReadingScanResultsCSV {
 
                 Sensors sensors = new Sensors();
 
-//                PrintStream oldSysOut = System.out;
-//                ByteArrayOutputStream outBuf = new ByteArrayOutputStream();
-//                try (PrintStream sysOut = new PrintStream(outBuf, false, StandardCharsets.UTF_8)) {
-//                    System.setOut(sysOut);
-//                    System.setErr(sysOut);
-
-                    // Normal main logic goes here
-                    sensors.start();
-                //}
-
-                //oldSysOut.print("Captured output: \"" + output.toCharArray()[0] + output.toCharArray()[1] + "\"");
+                sensors.start();
 
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {
@@ -98,9 +94,21 @@ public class ReadingScanResultsCSV {
                                                     System.out.println(actualFreeSpots);
                                                     System.out.println(licensePlate);
                                                     if(actualFreeSpots.equals("11")) {
+                                                        outlook.sendEmail(MailContent.builder()
+                                                                .subject("Client meeting with " + appointment.getVisitor().getFirstName() + " " + appointment.getVisitor().getLastName())
+                                                                .content("The client will be in the lobby in approximately 10 minutes.")
+                                                                .contentType("Text")
+                                                                .toEmail("danito22231@gmail.com")
+                                                                .build());
                                                         smsSending.sendSMS(appointment.getVisitor().getPhoneNumber(), "There are currently no available guest spots in the main parking. Please head over to: https://goo.gl/maps/KU2Cbai2EBENwGHfA");
                                                     }
                                                     else {
+                                                        outlook.sendEmail(MailContent.builder()
+                                                                .subject("Client meeting with " + appointment.getVisitor().getFirstName() + " " + appointment.getVisitor().getLastName())
+                                                                .content("The client will be in the lobby in approximately 2 minutes.")
+                                                                .toEmail("danito22231@gmail.com")
+                                                                .contentType("Text")
+                                                                .build());
                                                         smsSending.sendSMS(appointment.getVisitor().getPhoneNumber(), "You can park at the designated guest spaces.");
                                                     }
                                                     lastPlate[0] = appointment.getLicensePlate();
