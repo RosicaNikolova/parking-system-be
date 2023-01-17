@@ -50,8 +50,8 @@ public class AppointmentController {
 
     private final EmployeeConverterDTO employeeConverterDTO;
 
-    @IsAuthenticated
-    @RolesAllowed({"ROLE_SECRETARY"})
+//    @IsAuthenticated
+//    @RolesAllowed({"ROLE_SECRETARY"})
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody Appointment meeting)
     {
