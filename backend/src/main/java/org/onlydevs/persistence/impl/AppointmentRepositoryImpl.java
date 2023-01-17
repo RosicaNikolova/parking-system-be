@@ -47,6 +47,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
                 .lastName(appointmentEntity.getLastName())
                 .firstName(appointmentEntity.getFirstName())
                 .comesByCar(appointmentEntity.getComesByCar())
+                .licensePlate(appointmentEntity.getLicensePlate())
                 .build();
         return AppointmentConverter.convertToModel(appointmentRepositoryJPA.save(newAppointmentEntity));
     }
