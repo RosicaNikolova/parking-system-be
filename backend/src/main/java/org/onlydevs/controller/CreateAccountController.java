@@ -11,9 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 @RequestMapping("/register")
 @AllArgsConstructor
 public class CreateAccountController {
@@ -27,6 +28,7 @@ public class CreateAccountController {
         User user = User.builder()
                 .email(registerRequest.getEmail())
                 .password(registerRequest.getPassword())
+                .roles(List.of(registerRequest.getRole()))
                 .build();
         CreateAccountResponseDTO registerResponse = CreateAccountResponseDTO.builder()
                 .id(createAccountUseCase.register(user))
