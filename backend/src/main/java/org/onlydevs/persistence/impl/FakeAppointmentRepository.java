@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,7 +58,7 @@ public class FakeAppointmentRepository implements AppointmentRepository {
     }
 
     @Override
-    public Appointment update(Long id, LocalDateTime newDateTime, String licensePlate) {
+    public Appointment update(Long id, LocalDateTime newDateTime, LocalTime newEndTime) {
         return null;
     }
 

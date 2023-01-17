@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +34,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public Appointment update(Long id, LocalDateTime newDateTime, String licensePlate) {
+    public Appointment update(Long id, LocalDateTime newDateTime, LocalTime newEndTime) {
         AppointmentEntity appointmentEntity = appointmentRepositoryJPA.findById(id).orElse(null);
         AppointmentEntity newAppointmentEntity = AppointmentEntity.builder()
                 .id(appointmentEntity.getId())
@@ -41,8 +42,8 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
                 .email(appointmentEntity.getEmail())
                 .phoneNumber(appointmentEntity.getPhoneNumber())
                 .dateTime(newDateTime)
+                .endTime(newEndTime)
                 .employee(appointmentEntity.getEmployee())
-                .licensePlate(licensePlate)
                 .lastName(appointmentEntity.getLastName())
                 .firstName(appointmentEntity.getFirstName())
                 .comesByCar(appointmentEntity.getComesByCar())

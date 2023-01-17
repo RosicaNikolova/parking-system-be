@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Service
 @AllArgsConstructor
@@ -20,12 +21,12 @@ public class UpdateAppointment implements UpdateAppointmentUseCase {
     private OutlookCalendarService outlookCalendarService;
 
     @Override
-    public Appointment updateAppointment(Long id, LocalDateTime newDateTime, String licensePlate) {
+    public Appointment updateAppointment(Long id, LocalDateTime newDateTime , LocalTime newEndTime) {
         try {
             outlookCalendarService.editAppointment(appointmentRepository.getAppointment(id).orElse(null).getOutlookAppointmentId(), newDateTime);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return appointmentRepository.update(id, newDateTime, licensePlate);
+        return appointmentRepository.update(id, newDateTime, newEndTime);
     }
 }
