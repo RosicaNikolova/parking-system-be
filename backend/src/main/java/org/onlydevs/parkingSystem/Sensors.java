@@ -10,6 +10,8 @@ public class Sensors {
     SerialPort activePort;
     SerialPort[] ports = SerialPort.getCommPorts();
 
+    public static String spots = "";
+
     public void showAllPort() {
         int i = 0;
         for(SerialPort port : ports) {
@@ -22,8 +24,10 @@ public class Sensors {
     public void setPort(int portIndex) {
         activePort = ports[portIndex];
 
-        if (activePort.openPort())
-            System.out.println(activePort.getPortDescription() + " port opened.");
+        activePort.openPort();
+
+//        if (activePort.openPort())
+//            System.out.println(activePort.getPortDescription() + " port opened.");
 
         activePort.addDataListener(new SerialPortDataListener() {
 
@@ -32,8 +36,10 @@ public class Sensors {
                 int size = event.getSerialPort().bytesAvailable();
                 byte[] buffer = new byte[size];
                 event.getSerialPort().readBytes(buffer, size);
-                for(byte b:buffer)
-                    System.out.print((char)b);
+                for(byte b:buffer) {
+                    //System.out.print((char)b);
+                    spots += (char)b;
+                }
             }
 
             @Override
@@ -44,11 +50,11 @@ public class Sensors {
     }
 
     public void start() {
-        //showAllPort();
-        Scanner reader = new Scanner(System.in);
-        //System.out.print("Port: ");
-        int p = reader.nextInt();
-        setPort(p);
-        reader.close();
+//        showAllPort();
+//        Scanner reader = new Scanner(System.in);
+//        System.out.print("Port: ");
+//        int p = reader.nextInt();
+        setPort(2);
+        //reader.close();
     }
 }

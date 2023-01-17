@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12f584fd-fcd2-4fea-8e24-d262b268051d" name="Changes" comment="Uploading latest SMS feature">
+    <list default="true" id="12f584fd-fcd2-4fea-8e24-d262b268051d" name="Changes" comment="Uploading finished SMS code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/onlydevs/parkingSystem/ReadingScanResultsCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/onlydevs/parkingSystem/ReadingScanResultsCSV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/onlydevs/parkingSystem/Sensors.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/onlydevs/parkingSystem/Sensors.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/onlydevs/parkingSystem/SmsSending.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/onlydevs/parkingSystem/SmsSending.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +44,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature-search-for-employee-last-name" />
+        <entry key="$PROJECT_DIR$" value="feature-employee-management" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

@@ -18,7 +18,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'com.opencsv:opencsv:3.7'
-    implementation 'com.fazecast:jSerialComm:2.9.2'
+    implementation 'com.fazecast:jSerialComm:2.9.3'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     compileOnly 'org.projectlombok:lombok:1.18.24'
